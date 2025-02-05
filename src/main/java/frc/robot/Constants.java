@@ -32,6 +32,20 @@ public final class Constants
 //    public static final PIDConstants ANGLE_PID       = new PIDConstants(0.4, 0, 0.01);
 //  }
 
+public static final class ClimberSubsystem {
+  public static final int CANidClimbMotor = 15;
+}
+
+public static final class ElevatorSubsystem {
+  public static final int CANidElevatorMotorleft = 9;
+  public static final int CANidElevatorMotorright = 10;
+}
+
+public static final class OuttakeSubsystem {
+  public static final int CANidOuttakeMotorleft = 11;
+  public static final int CANidOuttakeMotorright = 12;
+}
+
   public static final class DrivebaseConstants
   {
 
