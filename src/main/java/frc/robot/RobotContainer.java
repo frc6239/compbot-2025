@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import frc.robot.Constants.OperatorConstants;
 import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -15,11 +16,14 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.Constants.OperatorConstants;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import java.io.File;
 import swervelib.SwerveInputStream;
 import frc.robot.subsystems.LEDController;
+import frc.robot.subsystems.Climber;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants.ClimberConstants;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a "declarative" paradigm, very
@@ -28,6 +32,9 @@ import frc.robot.subsystems.LEDController;
  */
 public class RobotContainer
 {
+  // The robot's subsystems and commands are defined here...
+  public final Climber m_climberSubsystem = new Climber();
+
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   final         CommandXboxController driverXbox = new CommandXboxController(0);
@@ -92,11 +99,28 @@ public class RobotContainer
   {
     // Configure the trigger bindings
     configureBindings();
+    
     DriverStation.silenceJoystickConnectionWarning(true);
     NamedCommands.registerCommand("test", Commands.print("I EXIST"));
 
     m_LedController= new LEDController();
+
+    SmartDashboard.putData("Deploy arm", Commands.runOnce(m_climberSubsystem::deploy, m_climberSubsystem));
+    SmartDashboard.putData("Lift robot", Commands.runOnce(m_climberSubsystem::lift, m_climberSubsystem));
+    SmartDashboard.putData("Reset arm encoder", Commands.runOnce(m_climberSubsystem::resetEncoder));
+    SmartDashboard.putData("Retract", Commands.runOnce(m_climberSubsystem::retract,m_climberSubsystem));
   }
+
+  /**
+   * Use this method to define your trigger->command mappings. Triggers can be created via the
+   * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
+   * predicate, or via the named factories in {@link
+   * edu.wpi.first.wpilibj2.command.button.CommandGenericHID}'s subclasses for {@link
+   * CommandXboxController Xbox}/{@link edu.wpi.first.wpilibj2.command.button.CommandPS4Controller
+   * PS4} controllers or {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
+   * joysticks}.
+   */
+  
 
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
@@ -154,7 +178,18 @@ public class RobotContainer
       driverXbox.back().whileTrue(Commands.none());
       driverXbox.leftBumper().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
       driverXbox.rightBumper().onTrue(Commands.none());
+      driverXbox.povRight().onTrue(Commands.runOnce(() -> { m_climberSubsystem.setPosition(ClimberConstants.kDeployPosition);}, m_climberSubsystem));
+      driverXbox.povLeft().onTrue(Commands.runOnce(() -> { m_climberSubsystem.setPosition(ClimberConstants.kLiftPosition);}, m_climberSubsystem));
+      driverXbox.povUp().onTrue(Commands.runOnce(() -> { m_climberSubsystem.raise();}, m_climberSubsystem));
+      driverXbox.povDown().onTrue(Commands.runOnce(() -> { m_climberSubsystem.lower();}, m_climberSubsystem));
     }
+
+
+// Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
+// cancelling on release.
+// m_driverController.b().whileTrue(m_armSubsystem.exampleMethodCommand());
+
+
 
   }
 
