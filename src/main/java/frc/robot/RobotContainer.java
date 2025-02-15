@@ -108,7 +108,10 @@ public class RobotContainer
     SmartDashboard.putData("Deploy arm", Commands.runOnce(m_climberSubsystem::deploy, m_climberSubsystem));
     SmartDashboard.putData("Lift robot", Commands.runOnce(m_climberSubsystem::lift, m_climberSubsystem));
     SmartDashboard.putData("Reset arm encoder", Commands.runOnce(m_climberSubsystem::resetEncoder));
-    SmartDashboard.putData("Retract", Commands.runOnce(m_climberSubsystem::retract,m_climberSubsystem));
+  
+    if (DriverStation.isTest()){
+        SmartDashboard.putData("Retract", Commands.runOnce(m_climberSubsystem::retract,m_climberSubsystem));
+    }
   }
 
   /**
