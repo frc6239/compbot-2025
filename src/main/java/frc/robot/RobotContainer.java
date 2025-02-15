@@ -20,6 +20,7 @@ import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import java.io.File;
 import swervelib.SwerveInputStream;
 import frc.robot.subsystems.LEDController;
+import frc.robot.subsystems.Elevator;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a "declarative" paradigm, very
@@ -28,6 +29,7 @@ import frc.robot.subsystems.LEDController;
  */
 public class RobotContainer
 {
+	public final Elevator m_ElevatorSubsystem = new Elevator();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   final         CommandXboxController driverXbox = new CommandXboxController(0);
@@ -144,7 +146,7 @@ public class RobotContainer
       driverXbox.rightBumper().onTrue(Commands.none());
     } else
     {
-      driverXbox.a().onTrue((Commands.runOnce(drivebase::zeroGyro)));
+      //driverXbox.a().onTrue((Commands.runOnce(drivebase::zeroGyro)));
       driverXbox.x().onTrue(Commands.runOnce(drivebase::addFakeVisionReading));
       driverXbox.b().whileTrue(
           drivebase.driveToPose(
@@ -154,6 +156,9 @@ public class RobotContainer
       driverXbox.back().whileTrue(Commands.none());
       driverXbox.leftBumper().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
       driverXbox.rightBumper().onTrue(Commands.none());
+	driverXbox.a().onTrue(Commands.runOnce(() -> {m_ElevatorSubsystem.setGoal(0);}, m_ElevatorSubsystem));
+    driverXbox.y().onTrue(Commands.runOnce(() -> {m_ElevatorSubsystem.setGoal(5);}, m_ElevatorSubsystem));
+
     }
 
   }
