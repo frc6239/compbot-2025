@@ -11,6 +11,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -98,8 +99,14 @@ public class RobotContainer
     NamedCommands.registerCommand("test", Commands.print("I EXIST"));
 
     m_LedController= new LEDController();
+
+
   }
 
+  public void configureSmartDashboard()
+  {
+    SmartDashboard.putData("Elevator L1", Commands.runOnce(m_ElevatorSubsystem:: goToL1,m_ElevatorSubsystem));
+  }
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary predicate, or via the
@@ -157,7 +164,7 @@ public class RobotContainer
       driverXbox.leftBumper().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
       driverXbox.rightBumper().onTrue(Commands.none());
 	driverXbox.a().onTrue(Commands.runOnce(() -> {m_ElevatorSubsystem.setGoal(0);}, m_ElevatorSubsystem));
-    driverXbox.y().onTrue(Commands.runOnce(() -> {m_ElevatorSubsystem.setGoal(5);}, m_ElevatorSubsystem));
+    driverXbox.y().onTrue(Commands.runOnce(() -> {m_ElevatorSubsystem.setGoal(3);}, m_ElevatorSubsystem));
 
     }
 

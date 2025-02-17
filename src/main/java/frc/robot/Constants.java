@@ -84,7 +84,7 @@ public static final class ElevatorConstants {
     public static final double L_1 = 18; 
     public static final double L_2 = 32;
     public static final double L_3 = 48;
-    public static final double pHome= 20;//testing value
+    public static final double pHome= 20;//testing values
 
     //distance traveled
     public static final double position_Home = 0 ;
