@@ -7,7 +7,7 @@
   "angle": {
     "type": "sparkmax_neo",
     "id": 3,
-    "canbus": null
+   "canbus": null
   },
   "encoder": {
     "type": "cancoder",
@@ -23,5 +23,5 @@
   "location": {
     "front": 10.96,
     "left": 10.96
-  }
+ }
 }
