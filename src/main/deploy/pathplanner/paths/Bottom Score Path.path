@@ -1,0 +1,131 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 7.608323863636363,
+        "y": 1.7464914772727262
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 5.70375,
+        "y": 1.427400568181819
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 6.021916390728475,
+        "y": 3.974151490066225
+      },
+      "prevControl": {
+        "x": 6.322923898225452,
+        "y": 4.758921063183346
+      },
+      "nextControl": {
+        "x": 5.818522350993377,
+        "y": 3.44387417218543
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 6.690211092715232,
+        "y": 0.5745653973509923
+      },
+      "prevControl": {
+        "x": 5.077586920529801,
+        "y": 1.1121067880794702
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "Score Coral",
+      "waypointRelativePos": 1.0,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "sequential",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Activate Intake"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "Deactivate Intake"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "Lift Elevator"
+              }
+            },
+            {
+              "type": "wait",
+              "data": {
+                "waitTime": 5.0
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "Activate Outake"
+              }
+            },
+            {
+              "type": "wait",
+              "data": {
+                "waitTime": 5.0
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "Deactivate Outake"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "Lower Elevator"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0.0
+  },
+  "reversed": false,
+  "folder": null,
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 0.0
+  },
+  "useDefaultConstraints": true
+}

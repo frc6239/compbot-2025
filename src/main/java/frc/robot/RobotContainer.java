@@ -99,6 +99,7 @@ public class RobotContainer
   {
     // Configure the trigger bindings
     configureBindings();
+    configurePathPlannerCommands();
     
     DriverStation.silenceJoystickConnectionWarning(true);
     NamedCommands.registerCommand("test", Commands.print("I EXIST"));
@@ -194,6 +195,10 @@ public class RobotContainer
 
 
 
+  }
+
+  private void configurePathPlannerCommands() {
+    NamedCommands.registerCommand("LowerClimber", Commands.runOnce(m_climberSubsystem::lower));
   }
 
   /**

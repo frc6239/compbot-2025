@@ -1,0 +1,158 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 7.598220198675497,
+        "y": 6.160637417218543
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 7.54010761589404,
+        "y": 5.2889486754966875
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 6.159933774834437,
+        "y": 2.935389072847682
+      },
+      "prevControl": {
+        "x": 6.988038079470199,
+        "y": 3.6690604304635763
+      },
+      "nextControl": {
+        "x": 5.411438711892109,
+        "y": 2.272248710065444
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 3.7046771523178808,
+        "y": 2.6157698675496692
+      },
+      "prevControl": {
+        "x": 5.169689368514132,
+        "y": 2.1591426832807077
+      },
+      "nextControl": {
+        "x": 2.586009933774834,
+        "y": 2.964445364238411
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 1.3293253311258277,
+        "y": 0.995881622516556
+      },
+      "prevControl": {
+        "x": 1.9612996688741724,
+        "y": 1.8675703642384098
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 2.0,
+      "rotationDegrees": 59.99999999999999
+    }
+  ],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "Score Coral",
+      "waypointRelativePos": 2.0,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "sequential",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Activate Intake"
+              }
+            },
+            {
+              "type": "wait",
+              "data": {
+                "waitTime": 1.0
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "Deactivate Intake"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "Lift Elevator"
+              }
+            },
+            {
+              "type": "wait",
+              "data": {
+                "waitTime": 5.0
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "Activate Outake"
+              }
+            },
+            {
+              "type": "wait",
+              "data": {
+                "waitTime": 1.0
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "Deactivate Outake"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "Lower Elevator"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 55.0
+  },
+  "reversed": false,
+  "folder": null,
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 0.0
+  },
+  "useDefaultConstraints": true
+}
