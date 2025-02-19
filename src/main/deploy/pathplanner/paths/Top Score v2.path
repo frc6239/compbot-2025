@@ -80,31 +80,13 @@
             {
               "type": "named",
               "data": {
-                "name": "Activate Intake"
+                "name": "GotoL1"
               }
             },
             {
               "type": "wait",
               "data": {
-                "waitTime": 1.0
-              }
-            },
-            {
-              "type": "named",
-              "data": {
-                "name": "Deactivate Intake"
-              }
-            },
-            {
-              "type": "named",
-              "data": {
-                "name": "Lift Elevator"
-              }
-            },
-            {
-              "type": "wait",
-              "data": {
-                "waitTime": 5.0
+                "waitTime": 2.0
               }
             },
             {
@@ -128,7 +110,13 @@
             {
               "type": "named",
               "data": {
-                "name": "Lower Elevator"
+                "name": "GotoHome"
+              }
+            },
+            {
+              "type": "wait",
+              "data": {
+                "waitTime": 2.0
               }
             }
           ]
@@ -152,7 +140,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 180.0
   },
   "useDefaultConstraints": true
 }

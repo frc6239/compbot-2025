@@ -65,7 +65,7 @@
             {
               "type": "wait",
               "data": {
-                "waitTime": 5.0
+                "waitTime": 2.0
               }
             },
             {
@@ -77,7 +77,7 @@
             {
               "type": "wait",
               "data": {
-                "waitTime": 5.0
+                "waitTime": 1.0
               }
             },
             {
@@ -89,7 +89,13 @@
             {
               "type": "named",
               "data": {
-                "name": "Lower Elevator"
+                "name": "GotoHome"
+              }
+            },
+            {
+              "type": "wait",
+              "data": {
+                "waitTime": 2.0
               }
             }
           ]
@@ -107,13 +113,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 180.0
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 180.0
   },
   "useDefaultConstraints": true
 }
