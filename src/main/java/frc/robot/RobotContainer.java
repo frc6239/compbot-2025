@@ -12,6 +12,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -23,7 +24,7 @@ import frc.robot.subsystems.LEDController;
 import frc.robot.subsystems.Climber;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.ClimberConstants;
-
+import frc.robot.subsystems.Elevator;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a "declarative" paradigm, very
@@ -34,14 +35,15 @@ public class RobotContainer
 {
   // The robot's subsystems and commands are defined here...
   public final Climber m_climberSubsystem = new Climber();
-
+  public final Elevator m_ElevatorSubsystem = new Elevator();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   final         CommandXboxController driverXbox = new CommandXboxController(0);
   // The robot's subsystems and commands are defined here...
   private final SwerveSubsystem       drivebase  = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
                                                                                 "swerve/neo.6239"));
-  public LEDController m_LedController;
+  public LEDController m_LedController = new LEDController();
+
   /**
    * Converts driver input into a field-relative ChassisSpeeds that is controlled by angular velocity.
    */
@@ -100,12 +102,15 @@ public class RobotContainer
     // Configure the trigger bindings
     configureBindings();
     configurePathPlannerCommands();
-    
+    configureSmartDashboard();
+
     DriverStation.silenceJoystickConnectionWarning(true);
     NamedCommands.registerCommand("test", Commands.print("I EXIST"));
 
-    m_LedController= new LEDController();
+  }
 
+  public void configureSmartDashboard()
+  {
     SmartDashboard.putData("Deploy arm", Commands.runOnce(m_climberSubsystem::deploy, m_climberSubsystem));
     SmartDashboard.putData("Lift robot", Commands.runOnce(m_climberSubsystem::lift, m_climberSubsystem));
     SmartDashboard.putData("Reset arm encoder", Commands.runOnce(m_climberSubsystem::resetEncoder));
@@ -113,8 +118,9 @@ public class RobotContainer
     if (DriverStation.isTest()){
         SmartDashboard.putData("Retract", Commands.runOnce(m_climberSubsystem::retract,m_climberSubsystem));
     }
-  }
 
+    SmartDashboard.putData("Elevator L1", Commands.runOnce(m_ElevatorSubsystem:: goToL1,m_ElevatorSubsystem));
+  }
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
@@ -172,7 +178,7 @@ public class RobotContainer
       driverXbox.rightBumper().onTrue(Commands.none());
     } else
     {
-      driverXbox.a().onTrue((Commands.runOnce(drivebase::zeroGyro)));
+      //driverXbox.a().onTrue((Commands.runOnce(drivebase::zeroGyro)));
       driverXbox.x().onTrue(Commands.runOnce(drivebase::addFakeVisionReading));
       driverXbox.b().whileTrue(
           drivebase.driveToPose(
@@ -186,6 +192,10 @@ public class RobotContainer
       driverXbox.povLeft().onTrue(Commands.runOnce(() -> { m_climberSubsystem.setPosition(ClimberConstants.kLiftPosition);}, m_climberSubsystem));
       driverXbox.povUp().onTrue(Commands.runOnce(() -> { m_climberSubsystem.raise();}, m_climberSubsystem));
       driverXbox.povDown().onTrue(Commands.runOnce(() -> { m_climberSubsystem.lower();}, m_climberSubsystem));
+	
+      driverXbox.a().onTrue(Commands.runOnce(() -> {m_ElevatorSubsystem.setGoal(0);}, m_ElevatorSubsystem));
+      driverXbox.y().onTrue(Commands.runOnce(() -> {m_ElevatorSubsystem.setGoal(3);}, m_ElevatorSubsystem));
+
     }
 
 
