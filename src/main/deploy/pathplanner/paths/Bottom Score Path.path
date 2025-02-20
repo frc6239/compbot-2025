@@ -20,12 +20,12 @@
         "y": 3.974151490066225
       },
       "prevControl": {
-        "x": 6.322923898225452,
-        "y": 4.758921063183346
+        "x": 6.2388323846800535,
+        "y": 4.786195980243932
       },
       "nextControl": {
-        "x": 5.818522350993377,
-        "y": 3.44387417218543
+        "x": 5.738617549668874,
+        "y": 2.913596854304635
       },
       "isLocked": false,
       "linkedName": null
@@ -36,8 +36,8 @@
         "y": 0.5745653973509923
       },
       "prevControl": {
-        "x": 5.077586920529801,
-        "y": 1.1121067880794702
+        "x": 6.196254139072847,
+        "y": 2.208981788079469
       },
       "nextControl": null,
       "isLocked": false,
@@ -59,25 +59,13 @@
             {
               "type": "named",
               "data": {
-                "name": "Activate Intake"
-              }
-            },
-            {
-              "type": "named",
-              "data": {
-                "name": "Deactivate Intake"
-              }
-            },
-            {
-              "type": "named",
-              "data": {
-                "name": "Lift Elevator"
+                "name": "GotoL1"
               }
             },
             {
               "type": "wait",
               "data": {
-                "waitTime": 5.0
+                "waitTime": 2.0
               }
             },
             {
@@ -89,7 +77,7 @@
             {
               "type": "wait",
               "data": {
-                "waitTime": 5.0
+                "waitTime": 1.0
               }
             },
             {
@@ -101,7 +89,13 @@
             {
               "type": "named",
               "data": {
-                "name": "Lower Elevator"
+                "name": "GotoHome"
+              }
+            },
+            {
+              "type": "wait",
+              "data": {
+                "waitTime": 2.0
               }
             }
           ]
@@ -119,13 +113,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 180.0
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 180.0
   },
   "useDefaultConstraints": true
 }
