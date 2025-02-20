@@ -1,0 +1,125 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 7.5684375,
+        "y": 6.213764204545455
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 5.653892045454545,
+        "y": 6.423167613636363
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 6.094557119205298,
+        "y": 3.92330298013245
+      },
+      "prevControl": {
+        "x": 6.024755982841662,
+        "y": 4.2224507074051765
+      },
+      "nextControl": {
+        "x": 6.2759517895127335,
+        "y": 3.1458972502434355
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 6.755587748344371,
+        "y": 7.373737582781456
+      },
+      "prevControl": {
+        "x": 5.359565021071645,
+        "y": 7.403652355508728
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "Score Coral",
+      "waypointRelativePos": 1.0033745781777177,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "sequential",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "GotoL1"
+              }
+            },
+            {
+              "type": "wait",
+              "data": {
+                "waitTime": 2.0
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "Activate Outake"
+              }
+            },
+            {
+              "type": "wait",
+              "data": {
+                "waitTime": 1.0
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "Deactivate Outake"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "GotoHome"
+              }
+            },
+            {
+              "type": "wait",
+              "data": {
+                "waitTime": 2.0
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 180.0
+  },
+  "reversed": false,
+  "folder": null,
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 180.0
+  },
+  "useDefaultConstraints": true
+}

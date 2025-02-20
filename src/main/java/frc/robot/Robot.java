@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -65,6 +66,23 @@ public class Robot extends TimedRobot
   @Override
   public void robotPeriodic()
   {
+     SmartDashboard.putNumber("Actual Position", m_robotContainer.m_climberSubsystem.getPosition());
+    SmartDashboard.putNumber( "Actual Velocity", m_robotContainer.m_climberSubsystem.getVelocity());
+
+    /*
+    if (SmartDashboard.getBoolean("Reset Encoder", false)) {
+      SmartDashboard.putBoolean("Reset Encoder", false);
+      // Reset the encoder position to 0
+      m_robotContainer.m_climberSubsystem.resetEncoder();
+    }
+    if (SmartDashboard.getBoolean("Arm Enabled", true)) {
+      m_robotContainer.m_climberSubsystem.Enabled();
+      
+    } else {
+      m_robotContainer.m_climberSubsystem.disabled();
+    }
+      */
+
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
@@ -139,6 +157,15 @@ public class Robot extends TimedRobot
   @Override
   public void teleopPeriodic()
   {
+    /*if (SmartDashboard.getBoolean("Control Mode", false)) {
+      /*
+       * Get the target position from SmartDashboard and set it as the setpoint
+       * for the closed loop controller with MAXMotionPositionControl as the
+       * control type.
+       */
+     // double targetPosition = SmartDashboard.getNumber("Target Position", 0);
+     // m_robotContainer.m_climberSubsystem.setPosition(targetPosition); }
+      
   }
 
   @Override

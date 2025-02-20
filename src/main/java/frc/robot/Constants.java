@@ -19,6 +19,44 @@ import swervelib.math.Matter;
 public final class Constants
 {
 
+
+  public static class ClimberConstants {
+    // Units are shows between <>
+    // Gearbox ratio of arm motor <unitless>
+    public static final int kArmGearBoxRatio = 100;
+
+    public static final double kP = 0.03;
+
+    // The arm rotates from 0 upto 120 degrees
+    // Calculate arm rotation distance in rotations <rotations> 
+    public static final double kArmRotationDistance = 125.0/360.0;
+
+    // Set position ranges to rotate arm
+    // Note:  Hard stop is at zero postion 
+    public static final double kMaxPosition =(kArmRotationDistance + 20.0/360.0) * kArmGearBoxRatio;
+    public static final double kDeployPosition = kArmRotationDistance * kArmGearBoxRatio;
+    public static final double kMinPosition = 0;
+
+    public static final double kLiftPosition = 45.0/360.0 * kArmGearBoxRatio;
+
+    // Set initial arm increment
+    public static final double kArmIncrement = 10.0 / 360.0 * kArmGearBoxRatio;
+    
+    // Time takes arm to rotate through range <seconds> 
+    public static final double kArmRotationTime = 3.0;
+    // Arm revolutions per minute = rotation time / ( 60 * rotation range) <rpm>
+    // Note:  even though arm does not rotate one full rotation we need to
+    //         include it in calculation since we are calculating revolutions per minute
+    public static final double kArmRpm = kArmRotationDistance/kArmRotationTime * 60; //2000.0/kArmGearBoxRatio; // kArmRotationTime / ( 60 * kArmRotationDistance) ;
+    // The motor is on the other side of the gear box and runs faster than the arm
+    // To calculate motor rpm multiple the arm rpm by the gearbox ratios <rpm>
+    public static final double kMotorRpm = kArmRpm * kArmGearBoxRatio;
+    public static final double kMotorRpmAcc = kMotorRpm/60;
+
+    public static final int kCANidMotor = 15;
+    
+  }
+
   public static final double ROBOT_MASS = (148 - 20.3) * 0.453592; // 32lbs * kg per pound
   public static final Matter CHASSIS    = new Matter(new Translation3d(0, 0, Units.inchesToMeters(8)), ROBOT_MASS);
   public static final double LOOP_TIME  = 0.13; //s, 20ms + 110ms sprk max velocity lag
@@ -55,7 +93,6 @@ public static final class OuttakeSubsystem {
 
   public static class OperatorConstants
   {
-
     // Joystick Deadband
     public static final double DEADBAND        = 0.1;
     public static final double LEFT_Y_DEADBAND = 0.1;
