@@ -103,8 +103,9 @@ public static final class OuttakeSubsystem {
 public static final class ElevatorConstants {
     // Units are shows between <>
     // Gearbox ratio of arm motor <unitless>
-    public static final int kCANIdLeftMotor=9;
-    public static final int kCANIdRightMotor=10;
+    public static final int kCANIdLeftMotor = 9;
+    public static final int kCANIdRightMotor = 10;
+    public static final double kGearboxRatio = 15.0;
 
     public static final int kElevatorGearBoxRatio = 100;
     public static final double kDt = 0.02;

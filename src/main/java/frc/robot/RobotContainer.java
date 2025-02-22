@@ -24,6 +24,7 @@ import frc.robot.subsystems.LEDController;
 import frc.robot.subsystems.Climber;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.ClimberConstants;
+import frc.robot.Constants.ElevatorConstants;
 import frc.robot.subsystems.Elevator;
 
 /**
@@ -179,22 +180,32 @@ public class RobotContainer
     } else
     {
       //driverXbox.a().onTrue((Commands.runOnce(drivebase::zeroGyro)));
-      driverXbox.x().onTrue(Commands.runOnce(drivebase::addFakeVisionReading));
-      driverXbox.b().whileTrue(
-          drivebase.driveToPose(
-              new Pose2d(new Translation2d(4, 4), Rotation2d.fromDegrees(0)))
-                              );
+      //driverXbox.x().onTrue(Commands.runOnce(drivebase::addFakeVisionReading));
+      //driverXbox.b().whileTrue(
+          //drivebase.driveToPose(
+              //new Pose2d(new Translation2d(4, 4), Rotation2d.fromDegrees(0)))
+                              //);
       driverXbox.start().whileTrue(Commands.none());
       driverXbox.back().whileTrue(Commands.none());
-      driverXbox.leftBumper().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
-      driverXbox.rightBumper().onTrue(Commands.none());
+      //driverXbox.leftBumper().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
+      //driverXbox.rightBumper().onTrue(Commands.none());
+
+      //Climber Buttons
       driverXbox.povRight().onTrue(Commands.runOnce(() -> { m_climberSubsystem.setPosition(ClimberConstants.kDeployPosition);}, m_climberSubsystem));
       driverXbox.povLeft().onTrue(Commands.runOnce(() -> { m_climberSubsystem.setPosition(ClimberConstants.kLiftPosition);}, m_climberSubsystem));
       driverXbox.povUp().onTrue(Commands.runOnce(() -> { m_climberSubsystem.raise();}, m_climberSubsystem));
       driverXbox.povDown().onTrue(Commands.runOnce(() -> { m_climberSubsystem.lower();}, m_climberSubsystem));
-	
-      driverXbox.a().onTrue(Commands.runOnce(() -> {m_ElevatorSubsystem.setGoal(0);}, m_ElevatorSubsystem));
-      driverXbox.y().onTrue(Commands.runOnce(() -> {m_ElevatorSubsystem.setGoal(3);}, m_ElevatorSubsystem));
+
+      //Elevator Buttons
+      driverXbox.a().onTrue(Commands.runOnce(() -> {m_ElevatorSubsystem.setGoal(ElevatorConstants.position_L1);}, m_ElevatorSubsystem));
+      driverXbox.b().onTrue(Commands.runOnce(() -> {m_ElevatorSubsystem.setGoal(ElevatorConstants.position_L2);}, m_ElevatorSubsystem));
+      driverXbox.y().onTrue(Commands.runOnce(() -> {m_ElevatorSubsystem.setGoal(ElevatorConstants.position_L3);}, m_ElevatorSubsystem));
+      driverXbox.x().onTrue(Commands.runOnce(() -> {m_ElevatorSubsystem.setGoal(ElevatorConstants.position_Home);}, m_ElevatorSubsystem));
+
+      //Outtake Buttons
+      //driverXbox.rightTrigger().onTrue(Commands.runOnce(() -> {m_OuttakeSubsystem.shootCoral();}, m_OuttakeSubsystem));
+      //driverXbox.leftTrigger().onTrue(Commands.runOnce(() -> {m_OuttakeSubsystem.feedCoral();}, m_OuttakeSubsystem));
+
 
     }
 

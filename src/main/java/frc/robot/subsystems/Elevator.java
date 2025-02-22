@@ -91,11 +91,11 @@ private RelativeEncoder m_rightencoder;
         m_rightMotorConfig.follow(ElevatorConstants.kCANIdLeftMotor,!leftInverted);
 
         m_rightMotorConfig.encoder
-        .positionConversionFactor(1.0 / 360.0 * 2.0 * Math.PI * 1.5)
+        .positionConversionFactor((Math.PI * 1.5) / ElevatorConstants.kGearboxRatio)
         .velocityConversionFactor(1);
     
         m_leftMotorConfig.encoder
-        .positionConversionFactor(1.0 / 360.0 * 2.0 * Math.PI * 1.5)
+        .positionConversionFactor((Math.PI * 1.5) / ElevatorConstants.kGearboxRatio)
         .velocityConversionFactor(1);
  
 
