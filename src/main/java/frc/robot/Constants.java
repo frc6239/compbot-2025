@@ -134,4 +134,14 @@ public static final class ElevatorConstants {
     
 }
 
+public static final class OuttakeConstants {
+  // Units are shows between <>
+  // Gearbox ratio of arm motor <unitless>
+  public static final int kCANIdLeftMotor = 11;
+  public static final int kCANIdRightMotor = 12;
+  public static final double kCoralShootSpeed = 0.05;
+  public static final double kCoralFeedSpeed = 0.02;
+
+}
+
 }

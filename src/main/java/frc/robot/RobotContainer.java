@@ -26,6 +26,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.ClimberConstants;
 import frc.robot.Constants.ElevatorConstants;
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Outtake;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a "declarative" paradigm, very
@@ -37,6 +38,7 @@ public class RobotContainer
   // The robot's subsystems and commands are defined here...
   public final Climber m_climberSubsystem = new Climber();
   public final Elevator m_ElevatorSubsystem = new Elevator();
+  public final Outtake m_OuttakeSubsystem = new Outtake();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   final         CommandXboxController driverXbox = new CommandXboxController(0);
@@ -203,8 +205,10 @@ public class RobotContainer
       driverXbox.x().onTrue(Commands.runOnce(() -> {m_ElevatorSubsystem.setGoal(ElevatorConstants.position_Home);}, m_ElevatorSubsystem));
 
       //Outtake Buttons
-      //driverXbox.rightTrigger().onTrue(Commands.runOnce(() -> {m_OuttakeSubsystem.shootCoral();}, m_OuttakeSubsystem));
-      //driverXbox.leftTrigger().onTrue(Commands.runOnce(() -> {m_OuttakeSubsystem.feedCoral();}, m_OuttakeSubsystem));
+      driverXbox.rightTrigger().onTrue(Commands.runOnce(() -> {m_OuttakeSubsystem.shootCoral();}, m_OuttakeSubsystem));
+      driverXbox.rightTrigger().onFalse(Commands.runOnce(() -> {m_OuttakeSubsystem.disable();}, m_OuttakeSubsystem));
+      driverXbox.leftTrigger().onTrue(Commands.runOnce(() -> {m_OuttakeSubsystem.feedCoral();}, m_OuttakeSubsystem));
+      driverXbox.leftTrigger().onFalse(Commands.runOnce(() -> {m_OuttakeSubsystem.disable();}, m_OuttakeSubsystem));
 
 
     }
