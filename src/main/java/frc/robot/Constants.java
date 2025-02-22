@@ -107,29 +107,29 @@ public static final class ElevatorConstants {
     public static final int kCANIdRightMotor = 10;
     public static final double kGearboxRatio = 15.0;
 
-    public static final int kElevatorGearBoxRatio = 100;
+    public static final int kElevatorGearBoxRatio = 15;
     public static final double kDt = 0.02;
-    public static final double kMaxVelocity = 1.75;
-    public static final double kMaxAcceleration = 0.75;
-    public static final double kP = 1.3;
+    public static final double kMaxVelocity = 7.5;
+    public static final double kMaxAcceleration = 4.0;
+    public static final double kP = 0.85;
     public static final double kI = 0.0;
-    public static final double kD = 0.7;
-    public static final double kS = 1.1;
-    public static final double kG = 1.2;
-    public static final double kV = 1.3;
+    public static final double kD = 0.0;//0.7;
+    public static final double kS = 0.0;//1.1;
+    public static final double kG = 0.18;
+    public static final double kV = 0.4;//1.3;
 
     //height of coarl in inches
     public static final double L_1 = 18; 
     public static final double L_2 = 32;
     public static final double L_3 = 48;
-    public static final double pHome= 20;//testing values
+    public static final double pHome= 0;//testing values
 
     //distance traveled
-    public static final double position_Home = 0 ;
+    public static final double position_Home = pHome ;
 
-    public static final double position_L1 = (L_1-pHome)/(2 * Math.PI) ;
-    public static final double position_L2 = (L_2-pHome)/(2 * Math.PI) ;
-    public static final double position_L3 = (L_3-pHome)/(2 * Math.PI) ;
+    public static final double position_L1 = (L_1-pHome);
+    public static final double position_L2 = (L_2-pHome);
+    public static final double position_L3 = (L_3-pHome);
 
     
 }

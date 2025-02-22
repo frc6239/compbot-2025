@@ -91,11 +91,11 @@ private RelativeEncoder m_rightencoder;
         m_rightMotorConfig.follow(ElevatorConstants.kCANIdLeftMotor,!leftInverted);
 
         m_rightMotorConfig.encoder
-        .positionConversionFactor((Math.PI * 1.5) / ElevatorConstants.kGearboxRatio)
+        .positionConversionFactor((Math.PI * 1.75) / ElevatorConstants.kGearboxRatio)
         .velocityConversionFactor(1);
     
         m_leftMotorConfig.encoder
-        .positionConversionFactor((Math.PI * 1.5) / ElevatorConstants.kGearboxRatio)
+        .positionConversionFactor((Math.PI * 1.75) / ElevatorConstants.kGearboxRatio)
         .velocityConversionFactor(1);
  
 
@@ -105,6 +105,7 @@ private RelativeEncoder m_rightencoder;
 
      public void setGoal(double position){
         m_controller.setGoal(position);
+        System.out.println("setting goal" + position);
      }
 
     @Override
