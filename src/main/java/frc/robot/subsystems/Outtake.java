@@ -37,7 +37,7 @@ public class Outtake extends SubsystemBase{
     public Outtake(){
 
         m_running=true;
-        boolean leftInverted=false;
+        boolean leftInverted=true;
         m_leftMotor = new SparkMax(OuttakeConstants.kCANIdLeftMotor, MotorType.kBrushless);
         m_leftMotorConfig = new SparkMaxConfig();
         m_leftMotorConfig.inverted(leftInverted);

@@ -201,7 +201,6 @@ public class RobotContainer
       //Elevator Buttons
       driverXbox.a().onTrue(Commands.runOnce(() -> {m_ElevatorSubsystem.setGoal(ElevatorConstants.position_L1);}, m_ElevatorSubsystem));
       driverXbox.b().onTrue(Commands.runOnce(() -> {m_ElevatorSubsystem.setGoal(ElevatorConstants.position_L2);}, m_ElevatorSubsystem));
-      driverXbox.y().onTrue(Commands.runOnce(() -> {m_ElevatorSubsystem.setGoal(ElevatorConstants.position_L3);}, m_ElevatorSubsystem));
       driverXbox.x().onTrue(Commands.runOnce(() -> {m_ElevatorSubsystem.setGoal(ElevatorConstants.position_Home);}, m_ElevatorSubsystem));
 
       //Outtake Buttons

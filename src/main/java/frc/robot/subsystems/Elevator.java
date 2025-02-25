@@ -141,10 +141,6 @@ private RelativeEncoder m_rightencoder;
         setGoal(ElevatorConstants.position_L2);
       }
 
-      public void goToL3() {        
-        setGoal(ElevatorConstants.position_L3);
-      }
-
       public void goToHome() {        
         setGoal(ElevatorConstants.position_Home);
       }
