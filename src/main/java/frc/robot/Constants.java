@@ -119,15 +119,17 @@ public static final class OuttakeSubsystem {
     public static final double kV = 0.4;//1.3;
 
     //height of coarl in inches
-    public static final double L_1 = 10; 
-    public static final double L_2 = 25;
-    public static final double pHome= 0;//testing values
+    public static final double L_2 = 18; 
+    public static final double L_3 = 33;
+
+
+    //DO NOT CHANGE pOffset
+    public static final double pOffset= 8;
 
     //distance traveled
-    public static final double position_Home = pHome ;
-
-    public static final double position_L1 = (L_1-pHome);
-    public static final double position_L2 = (L_2-pHome);
+    public static final double position_Home = 0;
+    public static final double position_L2 = (L_2-pOffset);
+    public static final double position_L3 = (L_3-pOffset);
     
 
     

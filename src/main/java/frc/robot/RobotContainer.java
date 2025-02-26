@@ -122,7 +122,6 @@ public class RobotContainer
         SmartDashboard.putData("Retract", Commands.runOnce(m_climberSubsystem::retract,m_climberSubsystem));
     }
 
-    SmartDashboard.putData("Elevator L1", Commands.runOnce(m_ElevatorSubsystem:: goToL1,m_ElevatorSubsystem));
   }
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
@@ -199,8 +198,8 @@ public class RobotContainer
       driverXbox.povDown().onTrue(Commands.runOnce(() -> { m_climberSubsystem.lower();}, m_climberSubsystem));
 
       //Elevator Buttons
-      driverXbox.a().onTrue(Commands.runOnce(() -> {m_ElevatorSubsystem.setGoal(ElevatorConstants.position_L1);}, m_ElevatorSubsystem));
-      driverXbox.b().onTrue(Commands.runOnce(() -> {m_ElevatorSubsystem.setGoal(ElevatorConstants.position_L2);}, m_ElevatorSubsystem));
+      driverXbox.a().onTrue(Commands.runOnce(() -> {m_ElevatorSubsystem.setGoal(ElevatorConstants.position_L2);}, m_ElevatorSubsystem));
+      driverXbox.b().onTrue(Commands.runOnce(() -> {m_ElevatorSubsystem.setGoal(ElevatorConstants.position_L3);}, m_ElevatorSubsystem));
       driverXbox.x().onTrue(Commands.runOnce(() -> {m_ElevatorSubsystem.setGoal(ElevatorConstants.position_Home);}, m_ElevatorSubsystem));
 
       //Outtake Buttons

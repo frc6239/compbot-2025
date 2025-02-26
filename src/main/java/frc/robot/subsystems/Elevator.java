@@ -132,13 +132,13 @@ private RelativeEncoder m_rightencoder;
       }
      
     
-      public void goToL1() {             
-        setGoal(ElevatorConstants.position_L1);
+      public void goToL2() {             
+        setGoal(ElevatorConstants.position_L2);
          
       }
     
-      public void goToL2() {        
-        setGoal(ElevatorConstants.position_L2);
+      public void goToL3() {        
+        setGoal(ElevatorConstants.position_L3);
       }
 
       public void goToHome() {        
