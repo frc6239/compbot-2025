@@ -57,6 +57,7 @@ this.Enabled();
         .positionConversionFactor(1)
         .velocityConversionFactor(1);
 
+    m_motorConfig.inverted(true);
     /*
      * Configure the closed loop controller. We want to make sure we set the
      * feedback sensor as the primary encoder.
