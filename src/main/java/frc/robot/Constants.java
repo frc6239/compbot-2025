@@ -32,11 +32,18 @@ public final class Constants
     public static final double kArmRotationDistance = 125.0/360.0;
 
     // Set position ranges to rotate arm
-    // Note:  Hard stop is at zero postion 
+    // Maximum we can go is 20 degrees above the rotation distance
     public static final double kMaxPosition =(kArmRotationDistance + 20.0/360.0) * kArmGearBoxRatio;
-    public static final double kDeployPosition = kArmRotationDistance * kArmGearBoxRatio;
-    public static final double kMinPosition = 0;
 
+    // Location where arm is deployed
+    public static final double kDeployPosition = kArmRotationDistance * kArmGearBoxRatio;
+
+    // Arm initially in bucket.
+    // We cannot retract the arm back to zero position once deployed
+    // We can only move to safe distance above the bucket as it is a hard stop
+    public static final double kMinSafePosition = 40.0/360.0 * kArmGearBoxRatio;
+
+    // Locaiton where frame lifts off the floor on the lift
     public static final double kLiftPosition = 45.0/360.0 * kArmGearBoxRatio;
 
     // Set initial arm increment
@@ -69,20 +76,6 @@ public final class Constants
 //    public static final PIDConstants TRANSLATION_PID = new PIDConstants(0.7, 0, 0);
 //    public static final PIDConstants ANGLE_PID       = new PIDConstants(0.4, 0, 0.01);
 //  }
-
-public static final class ClimberSubsystem {
-  public static final int CANidClimbMotor = 15;
-}
-
-public static final class ElevatorSubsystem {
-  public static final int CANidElevatorMotorleft = 9;
-  public static final int CANidElevatorMotorright = 10;
-}
-
-public static final class OuttakeSubsystem {
-  public static final int CANidOuttakeMotorleft = 11;
-  public static final int CANidOuttakeMotorright = 12;
-}
 
   public static final class DrivebaseConstants
   {

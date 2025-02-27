@@ -94,7 +94,7 @@ this.Enabled();
     // Initialize dashboard values
     SmartDashboard.setDefaultNumber("Arm Increment", ClimberConstants.kArmIncrement);
     
-    SmartDashboard.setDefaultNumber("Target Position", ClimberConstants.kMinPosition);
+    SmartDashboard.setDefaultNumber("Target Position", ClimberConstants.kMinSafePosition);
     SmartDashboard.setDefaultBoolean("Arm Enabled", true);
     SmartDashboard.setDefaultBoolean("Reset Encoder", false);
 
@@ -185,7 +185,7 @@ this.Enabled();
 
   public void retract() {
     if (m_enabled) {
-      setPosition(ClimberConstants.kMinPosition);
+      setPosition(ClimberConstants.kMinSafePosition);
     } else { 
       // send an alert
     }
