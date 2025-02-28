@@ -58,6 +58,8 @@ private RelativeEncoder m_rightencoder;
 //Limit switch for the max height
 DigitalInput maxLimitSwitch = new DigitalInput(0);
 
+  
+
    private SparkMaxConfig m_leftMotorConfig;
    private SparkMaxConfig m_rightMotorConfig;
 
@@ -135,7 +137,8 @@ DigitalInput maxLimitSwitch = new DigitalInput(0);
         //FIX ME Need to verify limit switch
         //Default logic for digitalIO is high also true
         if (!maxLimitSwitch.get()) {
-          m_controller.setGoal(25.5);
+          System.out.println("LimitSwitch toggle encoder is " + m_leftencoder.getPosition());
+          //m_controller.setGoal(25.5);
         }
 
         m_LeftMotor.setVoltage(

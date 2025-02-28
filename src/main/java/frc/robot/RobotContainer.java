@@ -59,6 +59,14 @@ public class RobotContainer
                                                             .scaleTranslation(0.8)
                                                             .allianceRelativeControl(true);
 
+  SwerveInputStream driveAngularVelocityRed = SwerveInputStream.of(drivebase.getSwerveDrive(),
+                                                                () -> driverXbox.getLeftY() * 1,
+                                                                () -> driverXbox.getLeftX() * 1)
+                                                            .withControllerRotationAxis(() -> driverXbox.getRightX() * 1)
+                                                            .deadband(OperatorConstants.DEADBAND)
+                                                            .scaleTranslation(0.8)
+                                                            .allianceRelativeControl(true);
+
   /**
    * Clone's the angular velocity input stream and converts it to a fieldRelative input stream.
    */
@@ -212,6 +220,7 @@ public class RobotContainer
 
     }
 
+    
 
 // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
 // cancelling on release.
@@ -219,6 +228,10 @@ public class RobotContainer
 
 
 
+  }
+
+  private void configureDriveCommand() {
+    
   }
 
   private void configurePathPlannerCommands() {

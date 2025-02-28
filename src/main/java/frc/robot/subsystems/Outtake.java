@@ -19,6 +19,8 @@ import frc.robot.Constants.OuttakeConstants;;
 public class Outtake extends SubsystemBase{
 //Instance Variables
 
+    DigitalInput outtakeLimitSwitch = new DigitalInput(1);
+    DigitalInput LEDTransmiter = new DigitalInput(2);
     private SparkMax m_leftMotor;
     private SparkMax m_rightMotor;
     private LimitSwitchConfig m_levelOneLimitSwitch;
@@ -80,7 +82,14 @@ public class Outtake extends SubsystemBase{
       @Override
       public void periodic() {
         // This method will be called once per scheduler run
-        if (m_running) {
+
+        System.out.println("sensor value " + outtakeLimitSwitch.get());
+        if (outtakeLimitSwitch.get() == false){
+          //feedCoral();
+          //System.out.println("Feeding");
+        }
+
+        if (m_running){
           run();
         } else { 
           stop();
