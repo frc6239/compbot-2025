@@ -89,7 +89,7 @@ public class Outtake extends SubsystemBase{
       public void periodic() {
         // This method will be called once per scheduler run
 
-        System.out.println("sensor value " + outtakeLimitSwitch.get());
+        //System.out.println("sensor value " + outtakeLimitSwitch.get());
         if ((outtakeLimitSwitch.get() == false) && (m_manualControl == false)){
           feedCoral();
           //System.out.println("Feeding");

@@ -203,10 +203,10 @@ public class RobotContainer
       //driverXbox.rightBumper().onTrue(Commands.none());
 
       //Climber Buttons
-      driverXbox.povRight().onTrue(Commands.runOnce(() -> { m_climberSubsystem.setPosition(ClimberConstants.kDeployPosition);}, m_climberSubsystem));
-      driverXbox.povLeft().onTrue(Commands.runOnce(() -> { m_climberSubsystem.setPosition(ClimberConstants.kLiftPosition);}, m_climberSubsystem));
-      driverXbox.povUp().onTrue(Commands.runOnce(() -> { m_climberSubsystem.raise();}, m_climberSubsystem));
-      driverXbox.povDown().onTrue(Commands.runOnce(() -> { m_climberSubsystem.lower();}, m_climberSubsystem));
+      //driverXbox.povRight().onTrue(Commands.runOnce(() -> { m_climberSubsystem.setPosition(ClimberConstants.kDeployPosition);}, m_climberSubsystem));
+      //driverXbox.povLeft().onTrue(Commands.runOnce(() -> { m_climberSubsystem.setPosition(ClimberConstants.kLiftPosition);}, m_climberSubsystem));
+      //driverXbox.povUp().onTrue(Commands.runOnce(() -> { m_climberSubsystem.raise();}, m_climberSubsystem));
+      //driverXbox.povDown().onTrue(Commands.runOnce(() -> { m_climberSubsystem.lower();}, m_climberSubsystem));
 
       //Elevator Buttons
       driverXbox.a().onTrue(Commands.runOnce(() -> {m_ElevatorSubsystem.setGoal(ElevatorConstants.position_L2);}, m_ElevatorSubsystem));
