@@ -9,6 +9,7 @@ import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.LimitSwitchConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
+import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -36,8 +37,11 @@ public class Outtake extends SubsystemBase{
 
     private double m_speed;
 
+    private boolean m_manualControl;
+
     public Outtake(){
 
+        m_manualControl = false;
         m_running=true;
         boolean leftInverted=true;
         m_leftMotor = new SparkMax(OuttakeConstants.kCANIdLeftMotor, MotorType.kBrushless);
@@ -47,6 +51,7 @@ public class Outtake extends SubsystemBase{
         m_leftMotorConfig.limitSwitch.reverseLimitSwitchEnabled(true);
         m_leftMotor.configure(m_leftMotorConfig, (SparkBase.ResetMode)null, (SparkBase.PersistMode)null);
         m_leftencoder = m_leftMotor.getEncoder();
+        m_leftMotorConfig.idleMode(IdleMode.kBrake);
 
         m_rightMotor = new SparkMax(OuttakeConstants.kCANIdRightMotor, MotorType.kBrushless);
         m_rightMotorConfig = new SparkMaxConfig();
@@ -55,6 +60,7 @@ public class Outtake extends SubsystemBase{
         m_rightMotor.configure(m_rightMotorConfig, (SparkBase.ResetMode)null, (SparkBase.PersistMode)null);
         m_rightencoder = m_rightMotor.getEncoder();
         m_rightMotorConfig.follow(OuttakeConstants.kCANIdLeftMotor,!leftInverted);
+        m_rightMotorConfig.idleMode(IdleMode.kBrake);
 
         m_rightMotorConfig.encoder
         .positionConversionFactor(1)
@@ -84,9 +90,14 @@ public class Outtake extends SubsystemBase{
         // This method will be called once per scheduler run
 
         System.out.println("sensor value " + outtakeLimitSwitch.get());
-        if (outtakeLimitSwitch.get() == false){
-          //feedCoral();
+        if ((outtakeLimitSwitch.get() == false) && (m_manualControl == false)){
+          feedCoral();
           //System.out.println("Feeding");
+         
+        }
+        
+        if ((outtakeLimitSwitch.get() == true) && (m_manualControl == false)){
+          disable();
         }
 
         if (m_running){
@@ -122,6 +133,21 @@ public class Outtake extends SubsystemBase{
         m_speed = OuttakeConstants.kCoralFeedSpeed;
           enable();
         }
+
+      public void manualShootCoral() {
+        m_manualControl = true;
+        shootCoral();
+      }
+
+      public void manualFeedCoral() {
+        m_manualControl = true;
+        feedCoral();
+      }
+
+      public void manualDisable() {
+        m_manualControl = false;
+        disable();
+      }
         
       
     
