@@ -15,7 +15,7 @@ private static final double red_orange =0.63;
 
 
 public LEDController() {
-  blinkin = new PWM(0);
+  blinkin = new PWM(3);
 
 }
 

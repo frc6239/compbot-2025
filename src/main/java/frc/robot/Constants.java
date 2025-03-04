@@ -112,15 +112,15 @@ public final class Constants
     public static final double kV = 0.4;//1.3;
 
     //height of coarl in inches
-    public static final double L_2 = 18; 
-    public static final double L_3 = 33;
+    public static final double L_2 = 18.5; 
+    public static final double L_3 = 33.5;
 
 
     //DO NOT CHANGE pOffset
-    public static final double pOffset= 8;
+    public static final double pOffset= 8.0;
 
     //distance traveled
-    public static final double position_Home = 0;
+    public static final double position_Home = 0.0;
     public static final double position_L2 = (L_2-pOffset);
     public static final double position_L3 = (L_3-pOffset);
     
@@ -134,7 +134,7 @@ public static final class OuttakeConstants {
   // Gearbox ratio of arm motor <unitless>
   public static final int kCANIdLeftMotor = 11;
   public static final int kCANIdRightMotor = 12;
-  public static final double kCoralShootSpeed = 0.25;
+  public static final double kCoralShootSpeed = 0.75;
   public static final double kCoralFeedSpeed = 0.06;
 
 }
