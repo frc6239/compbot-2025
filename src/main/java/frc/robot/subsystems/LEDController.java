@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.PWM;
 public class LEDController extends SubsystemBase
 {
 
-private PWM blinkin;
+public PWM blinkin;
 private static final double orange =0.65;
 private static final double red_orange =0.63;
 

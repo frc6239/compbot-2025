@@ -85,6 +85,12 @@ public class Outtake extends SubsystemBase{
         m_speed = -m_speed;
       }
     
+      public boolean beamBreakCleared() {
+
+        return outtakeLimitSwitch.get();  // Return true if beam is cleared (no game piece), false if blocked
+    }
+
+
       @Override
       public void periodic() {
         // This method will be called once per scheduler run

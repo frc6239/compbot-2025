@@ -55,6 +55,8 @@ private LimitSwitchConfig m_levelTwoLimitSwitch;
 private RelativeEncoder m_leftencoder;
 private RelativeEncoder m_rightencoder;
 
+public boolean m_elevatorEnabled = true;
+
 //Limit switch for the max height
 DigitalInput maxLimitSwitch = new DigitalInput(0);
 
@@ -63,7 +65,7 @@ DigitalInput maxLimitSwitch = new DigitalInput(0);
    private SparkMaxConfig m_leftMotorConfig;
    private SparkMaxConfig m_rightMotorConfig;
 
-   private boolean m_enabled;
+   public boolean m_enabled;
 
    private final TrapezoidProfile.Constraints m_constraints =
       new TrapezoidProfile.Constraints(ElevatorConstants.kMaxVelocity, ElevatorConstants.kMaxAcceleration);
@@ -154,12 +156,22 @@ DigitalInput maxLimitSwitch = new DigitalInput(0);
 
     }
 
-    public void Enabled() {
-        m_enabled = true;
-      }
-      public void disabled() {
-        m_enabled = false;
-      }
+    public void enableElevator(boolean isEnabled) {
+      m_elevatorEnabled = isEnabled;
+  }
+
+  public boolean isEnabled() {
+    return m_elevatorEnabled;
+  }
+
+  public void disableElevator() {
+    m_elevatorEnabled = false;
+}
+
+public void enableElevator() {
+  m_elevatorEnabled = true;
+}
+
      
     
       public void goToL2() {             
