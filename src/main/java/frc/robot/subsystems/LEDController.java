@@ -39,7 +39,7 @@ public void set_Green() {
 @Override
 public void periodic() {
   // When vision is enabled we must manually update odometry in SwerveDrive
-blinkin.setSpeed(0.45);
+//blinkin.setSpeed(0.45);
 }
 
 public void enable() {
