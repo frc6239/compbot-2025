@@ -27,13 +27,14 @@ public final class Constants
 
     public static final double kP = 0.03;
 
-    // The arm rotates from 0 upto 120 degrees
+    // The arm rotates from 0 upto 150 degrees
     // Calculate arm rotation distance in rotations <rotations> 
-    public static final double kArmRotationDistance = 125.0/360.0;
+    public static final double kArmRotationDistance = 150.0/360.0;
 
     // Set position ranges to rotate arm
-    // Maximum we can go is 20 degrees above the rotation distance
-    public static final double kMaxPosition =(kArmRotationDistance + 20.0/360.0) * kArmGearBoxRatio;
+    // Maximum we can go is above the rotation distance
+    
+    public static final double kMaxPosition =(kArmRotationDistance + 0.0/360.0) * kArmGearBoxRatio;
 
     // Location where arm is deployed
     public static final double kDeployPosition = kArmRotationDistance * kArmGearBoxRatio;
@@ -44,7 +45,7 @@ public final class Constants
     public static final double kMinSafePosition = 40.0/360.0 * kArmGearBoxRatio;
 
     // Locaiton where frame lifts off the floor on the lift
-    public static final double kLiftPosition = 45.0/360.0 * kArmGearBoxRatio;
+    public static final double kLiftPosition = 52.5/360.0 * kArmGearBoxRatio;
 
     // Set initial arm increment
     public static final double kArmIncrement = 10.0 / 360.0 * kArmGearBoxRatio;
@@ -54,13 +55,15 @@ public final class Constants
     // Arm revolutions per minute = rotation time / ( 60 * rotation range) <rpm>
     // Note:  even though arm does not rotate one full rotation we need to
     //         include it in calculation since we are calculating revolutions per minute
-    public static final double kArmRpm = kArmRotationDistance/kArmRotationTime * 60; //2000.0/kArmGearBoxRatio; // kArmRotationTime / ( 60 * kArmRotationDistance) ;
+    public static final double kArmRpm = kArmRotationDistance/kArmRotationTime * 60;
     // The motor is on the other side of the gear box and runs faster than the arm
     // To calculate motor rpm multiple the arm rpm by the gearbox ratios <rpm>
     public static final double kMotorRpm = kArmRpm * kArmGearBoxRatio;
     public static final double kMotorRpmAcc = kMotorRpm/60;
 
-    public static final int kCANidMotor = 15;
+    public static final int kCANidMotorRight = 15;
+    public static final int kCANidMotorLeft = 16;
+
     
   }
 

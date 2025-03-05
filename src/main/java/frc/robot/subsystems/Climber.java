@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Constants.ClimberConstants;
+import frc.robot.Constants.ElevatorConstants;
+
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkClosedLoopController;
@@ -19,6 +21,7 @@ import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.ClosedLoopSlot;
+import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.config.ClosedLoopConfig.FeedbackSensor;
 
 public class Climber extends SubsystemBase {
@@ -27,25 +30,38 @@ public class Climber extends SubsystemBase {
    * Instance variables for class
    */
 
-  private SparkMax m_motor;
-  private SparkMaxConfig m_motorConfig;
-  private SparkClosedLoopController m_closedLoopController;
-  private RelativeEncoder m_encoder;
+  
   private boolean m_enabled;
+  
+  // Right motor is lead
+  private SparkMax m_motorRight;
+  private SparkMaxConfig m_motorConfigRight;
+  private SparkClosedLoopController m_closedLoopControllerRight;
+  private RelativeEncoder m_encoderRight;
+  
+  private boolean m_rightInverted = true;
 
+  // Left motor is follower
+  private SparkMax m_motorLeft;
+  private SparkMaxConfig m_motorConfigLeft;
+  
   /** Creates a new ArmSubsystem. */
   public Climber() {
-    m_motor = new SparkMax(ClimberConstants.kCANidMotor, MotorType.kBrushless);
-    m_closedLoopController = m_motor.getClosedLoopController();
-    m_encoder = m_motor.getEncoder();
-this.Enabled();
-   // m_enabled = true;
+    m_motorRight = new SparkMax(ClimberConstants.kCANidMotorRight, MotorType.kBrushless);
+    m_closedLoopControllerRight = m_motorRight.getClosedLoopController();
+    m_encoderRight = m_motorRight.getEncoder();
+
+    m_motorLeft = new SparkMax(ClimberConstants.kCANidMotorRight, MotorType.kBrushless);
+
+    m_enabled = true;
+   
 
     /*
      * Create a new SPARK MAX configuration object. This will store the
      * configuration parameters for the SPARK MAX that we will set below.
      */
-    m_motorConfig = new SparkMaxConfig();
+    m_motorConfigRight = new SparkMaxConfig();
+    m_motorConfigLeft = new SparkMaxConfig();
 
     /*
      * Configure the encoder. For this specific example, we are using the
@@ -53,16 +69,18 @@ this.Enabled();
      * needed, we can adjust values like the position or velocity conversion
      * factors.
      */
-    m_motorConfig.encoder
+    m_motorConfigRight.encoder
         .positionConversionFactor(1)
         .velocityConversionFactor(1);
 
-    m_motorConfig.inverted(true);
+    m_motorConfigRight.inverted(m_rightInverted);
+    m_motorConfigLeft.follow(ClimberConstants.kCANidMotorRight, !m_rightInverted);
+    
     /*
      * Configure the closed loop controller. We want to make sure we set the
      * feedback sensor as the primary encoder.
      */
-    m_motorConfig.closedLoop
+    m_motorConfigRight.closedLoop
         .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
         // Set PID values for position control. We don't need to pass a closed
         // loop slot, as it will default to slot 0.
@@ -71,7 +89,7 @@ this.Enabled();
         .d(0)
         .outputRange(-1, 1);
 
-    m_motorConfig.closedLoop.maxMotion
+    m_motorConfigRight.closedLoop.maxMotion
         
         // Set MAXMotion parameters for position control. We don't need to pass
         // a closed loop slot, as it will default to slot 0.
@@ -89,8 +107,9 @@ this.Enabled();
      * the SPARK MAX loses power. This is useful for power cycles that may occur
      * mid-operation.
      */
-    m_motor.configure(m_motorConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
-
+    m_motorRight.configure(m_motorConfigRight, (SparkBase.ResetMode)null, (SparkBase.PersistMode)null);
+    m_motorLeft.configure(m_motorConfigLeft,(SparkBase.ResetMode)null, (SparkBase.PersistMode)null);
+    
     // Initialize dashboard values
     SmartDashboard.setDefaultNumber("Arm Increment", ClimberConstants.kArmIncrement);
     
@@ -144,7 +163,7 @@ this.Enabled();
   public void setPosition(double targetPosition) {
     if (m_enabled) {
       System.out.println(" In set position " + targetPosition);
-       m_closedLoopController.setReference(targetPosition, ControlType.kMAXMotionPositionControl,
+       m_closedLoopControllerRight.setReference(targetPosition, ControlType.kMAXMotionPositionControl,
           ClosedLoopSlot.kSlot0);
     } else {
       // set an alert
@@ -152,7 +171,7 @@ this.Enabled();
   }
 
   public void lower() {
-    double currentPosition = m_encoder.getPosition();
+    double currentPosition = m_encoderRight.getPosition();
 
     if (currentPosition < (ClimberConstants.kMaxPosition - ClimberConstants.kArmIncrement)) {
       setPosition(currentPosition + ClimberConstants.kArmIncrement);
@@ -160,7 +179,7 @@ this.Enabled();
   }
 
   public void raise() {
-    double currentPosition = m_encoder.getPosition();
+    double currentPosition = m_encoderRight.getPosition();
 
     if (currentPosition > (ClimberConstants.kMaxPosition + ClimberConstants.kArmIncrement)) {
       setPosition(currentPosition + ClimberConstants.kArmIncrement);
@@ -205,15 +224,15 @@ this.Enabled();
   }
 
   public double getPosition() {
-    return(m_encoder.getPosition());
+    return(m_encoderRight.getPosition());
   }
 
   public double getVelocity() {
-    return(m_encoder.getVelocity());
+    return(m_encoderRight.getVelocity());
   }
 
   public void resetEncoder() {
-    m_encoder.setPosition(0);
+    m_encoderRight.setPosition(0);
 
   }
 }
