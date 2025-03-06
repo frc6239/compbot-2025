@@ -25,7 +25,7 @@ public final class Constants
     // Gearbox ratio of arm motor <unitless>
     public static final int kArmGearBoxRatio = 144;
 
-    public static final double kP = 0.30;
+    public static final double kP = 0.40;
 
     // The arm rotates from 0 upto 150 degrees
     // Calculate arm rotation distance in rotations <rotations> 
