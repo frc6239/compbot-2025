@@ -100,7 +100,7 @@ DigitalInput maxLimitSwitch = new DigitalInput(0);
         m_rightMotorConfig.limitSwitch.reverseLimitSwitchEnabled(true);
         m_RightMotor.configure(m_rightMotorConfig, (SparkBase.ResetMode)null, (SparkBase.PersistMode)null);
         m_rightencoder = m_RightMotor.getEncoder();
-        m_rightMotorConfig.follow(ElevatorConstants.kCANIdLeftMotor,!leftInverted);
+        m_rightMotorConfig.follow(ElevatorConstants.kCANIdLeftMotor,true);
 
         m_rightMotorConfig.encoder
         .positionConversionFactor((Math.PI * 1.5) / ElevatorConstants.kGearboxRatio)

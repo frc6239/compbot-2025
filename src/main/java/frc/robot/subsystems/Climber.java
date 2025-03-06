@@ -51,7 +51,7 @@ public class Climber extends SubsystemBase {
     m_closedLoopControllerRight = m_motorRight.getClosedLoopController();
     m_encoderRight = m_motorRight.getEncoder();
 
-    m_motorLeft = new SparkMax(ClimberConstants.kCANidMotorRight, MotorType.kBrushless);
+    m_motorLeft = new SparkMax(ClimberConstants.kCANidMotorLeft, MotorType.kBrushless);
 
     m_enabled = true;
    
@@ -74,7 +74,8 @@ public class Climber extends SubsystemBase {
         .velocityConversionFactor(1);
 
     m_motorConfigRight.inverted(m_rightInverted);
-    m_motorConfigLeft.follow(ClimberConstants.kCANidMotorRight, !m_rightInverted);
+    
+    m_motorConfigLeft.follow(ClimberConstants.kCANidMotorRight, true);
     
     /*
      * Configure the closed loop controller. We want to make sure we set the

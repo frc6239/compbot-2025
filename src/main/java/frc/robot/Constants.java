@@ -37,7 +37,7 @@ public final class Constants
     public static final double kMaxPosition =(kArmRotationDistance + 0.0/360.0) * kArmGearBoxRatio;
 
     // Location where arm is deployed
-    public static final double kDeployPosition = kArmRotationDistance * kArmGearBoxRatio;
+    public static final double kDeployPosition = 150.0/360.0 * kArmGearBoxRatio;//kArmRotationDistance * kArmGearBoxRatio;
 
     // Arm initially in bucket.
     // We cannot retract the arm back to zero position once deployed
@@ -61,6 +61,7 @@ public final class Constants
     public static final double kMotorRpm = kArmRpm * kArmGearBoxRatio;
     public static final double kMotorRpmAcc = kMotorRpm/60;
 
+     // start with 15 right, 16 left
     public static final int kCANidMotorRight = 15;
     public static final int kCANidMotorLeft = 16;
 
