@@ -28,7 +28,7 @@ public class Robot extends TimedRobot
   private        Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-  private Outtake m_Outtake;
+  
 
   private Timer disabledTimer;
 
@@ -130,7 +130,7 @@ public class Robot extends TimedRobot
   public void autonomousPeriodic()
   {
      // Check the state of the beam break sensor
-     if (m_Outtake.beamBreakCleared()) {
+     if (m_robotContainer.m_OuttakeSubsystem.beamBreakCleared()) {
       // if beam is clear, enable elevator
       m_elevatorEnabled = true;  // Motor stops
       m_robotContainer.m_ElevatorSubsystem.enableElevator();
@@ -174,7 +174,7 @@ public class Robot extends TimedRobot
   {
 
      // Check the state of the beam break sensor
-     if (m_Outtake.beamBreakCleared()) {
+     if (m_robotContainer.m_OuttakeSubsystem.beamBreakCleared()) {
       // if beam is clear, enable elevator
       m_elevatorEnabled = true;  // Motor stops
       m_robotContainer.m_ElevatorSubsystem.enableElevator();

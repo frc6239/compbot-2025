@@ -25,7 +25,7 @@ public final class Constants
     // Gearbox ratio of arm motor <unitless>
     public static final int kArmGearBoxRatio = 144;
 
-    public static final double kP = 0.40;
+    public static final double kP = 0.75;
 
     // The arm rotates from 0 upto 150 degrees
     // Calculate arm rotation distance in rotations <rotations> 
@@ -51,7 +51,7 @@ public final class Constants
     public static final double kArmIncrement = 10.0 / 360.0 * kArmGearBoxRatio;
     
     // Time takes arm to rotate through range <seconds> 
-    public static final double kArmRotationTime = 3.0;
+    public static final double kArmRotationTime = 2.0;
     // Arm revolutions per minute = rotation time / ( 60 * rotation range) <rpm>
     // Note:  even though arm does not rotate one full rotation we need to
     //         include it in calculation since we are calculating revolutions per minute
