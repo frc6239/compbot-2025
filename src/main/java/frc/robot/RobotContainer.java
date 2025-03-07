@@ -25,6 +25,7 @@ import frc.robot.subsystems.LEDController;
 import frc.robot.subsystems.Climber;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.ClimberConstants;
+import frc.robot.Constants.DrivebaseConstants;
 import frc.robot.Constants.ElevatorConstants;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Outtake;
@@ -43,8 +44,9 @@ public class RobotContainer
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   final         CommandXboxController driverXbox = new CommandXboxController(0);
+  public double m_scaleSpeed = DrivebaseConstants.FAST_SPEED;
   // The robot's subsystems and commands are defined here...
-  private final SwerveSubsystem       drivebase  = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
+  public final SwerveSubsystem       drivebase  = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
                                                                                 "swerve/neo.6239"));
   public LEDController m_LedController = new LEDController();
 
@@ -53,16 +55,16 @@ public class RobotContainer
    */
   
   SwerveInputStream driveAngularVelocityBlue = SwerveInputStream.of(drivebase.getSwerveDrive(),
-                                                                () -> driverXbox.getLeftY() * -1,
-                                                                () -> driverXbox.getLeftX() * -1)
+                                                                () -> driverXbox.getLeftY() * -1 * m_scaleSpeed,
+                                                                () -> driverXbox.getLeftX() * -1 * m_scaleSpeed)
                                                             .withControllerRotationAxis(() -> driverXbox.getRightX() * -1)
                                                             .deadband(OperatorConstants.DEADBAND)
                                                             .scaleTranslation(0.8)
                                                             .allianceRelativeControl(true);
 
   SwerveInputStream driveAngularVelocityRed = SwerveInputStream.of(drivebase.getSwerveDrive(),
-                                                                () -> driverXbox.getLeftY() * 1,
-                                                                () -> driverXbox.getLeftX() * 1)
+                                                                () -> driverXbox.getLeftY() * 1 * m_scaleSpeed,
+                                                                () -> driverXbox.getLeftX() * 1 * m_scaleSpeed)
                                                             .withControllerRotationAxis(() -> driverXbox.getRightX() * -1)
                                                             .deadband(OperatorConstants.DEADBAND)
                                                             .scaleTranslation(0.8)
@@ -116,6 +118,7 @@ public class RobotContainer
     configureBindings();
     configurePathPlannerCommands();
     configureSmartDashboard();
+    m_scaleSpeed = DrivebaseConstants.FAST_SPEED;
 
     DriverStation.silenceJoystickConnectionWarning(true);
     NamedCommands.registerCommand("test", Commands.print("I EXIST"));
@@ -133,6 +136,8 @@ public class RobotContainer
     }
 
   }
+
+
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
@@ -219,6 +224,8 @@ public class RobotContainer
       driverXbox.leftTrigger().onTrue(Commands.runOnce(() -> {m_OuttakeSubsystem.manualFeedCoral();}, m_OuttakeSubsystem));
       driverXbox.leftTrigger().onFalse(Commands.runOnce(() -> {m_OuttakeSubsystem.manualDisable();}, m_OuttakeSubsystem));
 
+      driverXbox.y().onTrue(Commands.runOnce(() -> {drivebase.toggleDriveSpeed();}, drivebase));
+    
 
     }
 

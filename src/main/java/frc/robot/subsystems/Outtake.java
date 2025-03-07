@@ -20,7 +20,7 @@ import frc.robot.Constants.OuttakeConstants;;
 public class Outtake extends SubsystemBase{
 //Instance Variables
 
-    DigitalInput outtakeLimitSwitch = new DigitalInput(1);
+    private DigitalInput outtakeLimitSwitch = new DigitalInput(1);
     DigitalInput LEDTransmiter = new DigitalInput(2);
     private SparkMax m_leftMotor;
     private SparkMax m_rightMotor;

@@ -12,6 +12,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import com.revrobotics.spark.config.LimitSwitchConfig;
+import frc.robot.Constants.OuttakeConstants;
+import frc.robot.subsystems.Outtake;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to each mode, as
@@ -20,11 +23,12 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
  */
 public class Robot extends TimedRobot
 {
-
+  public boolean m_elevatorEnabled = true;
   private static Robot   instance;
   private        Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+  private Outtake m_Outtake;
 
   private Timer disabledTimer;
 
@@ -44,6 +48,7 @@ public class Robot extends TimedRobot
   @Override
   public void robotInit()
   {
+  
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
@@ -68,6 +73,20 @@ public class Robot extends TimedRobot
   @Override
   public void robotPeriodic()
   {
+
+    // Check the state of the beam break sensor
+    if (m_Outtake.beamBreakCleared()) {
+      // if beam is clear, enable elevator
+      m_elevatorEnabled = true;  // Motor stops
+      m_robotContainer.m_ElevatorSubsystem.enableElevator();
+  } else {
+    // If beam is blocked, disable elevator
+    m_elevatorEnabled = false;
+    m_robotContainer.m_ElevatorSubsystem.disableElevator();
+  
+  }
+  m_robotContainer.m_scaleSpeed = m_robotContainer.drivebase.getScaleSpeed();
+
      SmartDashboard.putNumber("Actual Position", m_robotContainer.m_climberSubsystem.getPosition());
     SmartDashboard.putNumber( "Actual Velocity", m_robotContainer.m_climberSubsystem.getVelocity());
 
