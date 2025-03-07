@@ -25,7 +25,7 @@ public final class Constants
     // Gearbox ratio of arm motor <unitless>
     public static final int kArmGearBoxRatio = 144;
 
-    public static final double kP = 0.75;
+    public static final double kP = 1.5;
 
     // The arm rotates from 0 upto 150 degrees
     // Calculate arm rotation distance in rotations <rotations> 
@@ -45,7 +45,7 @@ public final class Constants
     public static final double kMinSafePosition = 35.0/360.0 * kArmGearBoxRatio;
 
     // Locaiton where frame lifts off the floor on the lift
-    public static final double kLiftPosition = 40.0/360.0 * kArmGearBoxRatio;
+    public static final double kLiftPosition = 25.0/360.0 * kArmGearBoxRatio;
 
     // Set initial arm increment
     public static final double kArmIncrement = 10.0 / 360.0 * kArmGearBoxRatio;
@@ -58,8 +58,8 @@ public final class Constants
     public static final double kArmRpm = kArmRotationDistance/kArmRotationTime * 60;
     // The motor is on the other side of the gear box and runs faster than the arm
     // To calculate motor rpm multiple the arm rpm by the gearbox ratios <rpm>
-    public static final double kMotorRpm = kArmRpm * kArmGearBoxRatio;
-    public static final double kMotorRpmAcc = kMotorRpm/60;
+    public static final double kMotorRpm = 0.3*kArmRpm * kArmGearBoxRatio;
+    public static final double kMotorRpmAcc = 3*kMotorRpm/60;
 
      // start with 15 right, 16 left
     public static final int kCANidMotorRight = 15;
@@ -108,9 +108,9 @@ public final class Constants
 
     public static final int kElevatorGearBoxRatio = 15;
     public static final double kDt = 0.02;
-    public static final double kMaxVelocity = 7.5;
-    public static final double kMaxAcceleration = 4.0;
-    public static final double kP = 0.85;
+    public static final double kMaxVelocity = 25.0;
+    public static final double kMaxAcceleration = 15.0;
+    public static final double kP = 1.2;
     public static final double kI = 0.0;
     public static final double kD = 0.0;//0.7;
     public static final double kS = 0.0;//1.1;
@@ -141,7 +141,7 @@ public static final class OuttakeConstants {
   public static final int kCANIdLeftMotor = 11;
   public static final int kCANIdRightMotor = 12;
   public static final double kCoralShootSpeed = 0.75;
-  public static final double kCoralFeedSpeed = 0.06;
+  public static final double kCoralFeedSpeed = 0.15;
 
 }
 
