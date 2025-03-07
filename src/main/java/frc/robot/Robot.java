@@ -52,6 +52,7 @@ public class Robot extends TimedRobot
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    m_robotContainer.m_LedController.set_Orange();
 
     // Create a timer to disable motor brake a few seconds after disable.  This will let the robot stop
     // immediately when disabled, but then also let it be pushed more 
@@ -73,36 +74,10 @@ public class Robot extends TimedRobot
   @Override
   public void robotPeriodic()
   {
-
-    // Check the state of the beam break sensor
-    if (m_Outtake.beamBreakCleared()) {
-      // if beam is clear, enable elevator
-      m_elevatorEnabled = true;  // Motor stops
-      m_robotContainer.m_ElevatorSubsystem.enableElevator();
-  } else {
-    // If beam is blocked, disable elevator
-    m_elevatorEnabled = false;
-    m_robotContainer.m_ElevatorSubsystem.disableElevator();
-  
-  }
-  m_robotContainer.m_scaleSpeed = m_robotContainer.drivebase.getScaleSpeed();
-
      SmartDashboard.putNumber("Actual Position", m_robotContainer.m_climberSubsystem.getPosition());
     SmartDashboard.putNumber( "Actual Velocity", m_robotContainer.m_climberSubsystem.getVelocity());
+    SmartDashboard.putNumber( "Drive Scaled Speed", m_robotContainer.drivebase.getScaleSpeed());
 
-    /*
-    if (SmartDashboard.getBoolean("Reset Encoder", false)) {
-      SmartDashboard.putBoolean("Reset Encoder", false);
-      // Reset the encoder position to 0
-      m_robotContainer.m_climberSubsystem.resetEncoder();
-    }
-    if (SmartDashboard.getBoolean("Arm Enabled", true)) {
-      m_robotContainer.m_climberSubsystem.Enabled();
-      
-    } else {
-      m_robotContainer.m_climberSubsystem.disabled();
-    }
-      */
 
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
     // commands, running already-scheduled commands, removing finished or interrupted commands,
@@ -154,6 +129,19 @@ public class Robot extends TimedRobot
   @Override
   public void autonomousPeriodic()
   {
+     // Check the state of the beam break sensor
+     if (m_Outtake.beamBreakCleared()) {
+      // if beam is clear, enable elevator
+      m_elevatorEnabled = true;  // Motor stops
+      m_robotContainer.m_ElevatorSubsystem.enableElevator();
+      m_robotContainer.m_LedController.set_Green();
+  } else {
+    // If beam is blocked, disable elevator
+    m_elevatorEnabled = false;
+    m_robotContainer.m_ElevatorSubsystem.disableElevator();
+    m_robotContainer.m_LedController.set_RedOrange();
+  
+  }
   }
 
   @Override
@@ -184,6 +172,23 @@ public class Robot extends TimedRobot
   @Override
   public void teleopPeriodic()
   {
+
+     // Check the state of the beam break sensor
+     if (m_Outtake.beamBreakCleared()) {
+      // if beam is clear, enable elevator
+      m_elevatorEnabled = true;  // Motor stops
+      m_robotContainer.m_ElevatorSubsystem.enableElevator();
+      m_robotContainer.m_LedController.set_Green();
+  } else {
+    // If beam is blocked, disable elevator
+    m_elevatorEnabled = false;
+    m_robotContainer.m_ElevatorSubsystem.disableElevator();
+    m_robotContainer.m_LedController.set_RedOrange();
+  
+  }
+  m_robotContainer.m_scaleSpeed = m_robotContainer.drivebase.getScaleSpeed();
+
+
     /*if (SmartDashboard.getBoolean("Control Mode", false)) {
       /*
        * Get the target position from SmartDashboard and set it as the setpoint
