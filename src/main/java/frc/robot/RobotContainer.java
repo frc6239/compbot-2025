@@ -9,6 +9,7 @@ import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Filesystem;
@@ -29,6 +30,9 @@ import frc.robot.Constants.DrivebaseConstants;
 import frc.robot.Constants.ElevatorConstants;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Outtake;
+
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a "declarative" paradigm, very
@@ -254,9 +258,7 @@ public class RobotContainer
 
   }
 
-  private void configurePathPlannerCommands() {
-    NamedCommands.registerCommand("LowerClimber", Commands.runOnce(m_climberSubsystem::lower));
-  }
+  
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -273,4 +275,15 @@ public class RobotContainer
   {
     drivebase.setMotorBrake(brake);
   }
+
+
+  private void configurePathPlannerCommands() {
+    NamedCommands.registerCommand("Enable Outtake", Commands.runOnce(m_OuttakeSubsystem::enable));
+    NamedCommands.registerCommand("Disable Outtake", Commands.runOnce(m_OuttakeSubsystem::disable));
+    NamedCommands.registerCommand("Home", Commands.runOnce(m_ElevatorSubsystem::goToHome));
+    NamedCommands.registerCommand("L2", Commands.runOnce(m_ElevatorSubsystem::goToL2));
+    NamedCommands.registerCommand("L3", Commands.runOnce(m_ElevatorSubsystem::goToL3));
+  }
+
+
 }
