@@ -267,8 +267,24 @@ public class RobotContainer
    */
   public Command getAutonomousCommand()
   {
-    // An example command will be run in autonomous
+    var alliance = DriverStation.getAlliance();
+
+    //return drivebase.getAutonomousCommand("Strafe Auto");
+    /* 
+    if(alliance.isPresent()){
+      if(alliance.get() == DriverStation.Alliance.Red){
+        return drivebase.getAutonomousCommand("Red Leave Auto");
+      } else {
+        return drivebase.getAutonomousCommand("Leave Auto");
+      }
+    }*/
+  
     return drivebase.getAutonomousCommand("No Auto");
+
+
+    
+    // An example command will be run in autonomous
+    //return drivebase.getAutonomousCommand("Leave Auto");
   }
 
   public void setMotorBrake(boolean brake)
