@@ -23,9 +23,9 @@ public final class Constants
   public static class ClimberConstants {
     // Units are shows between <>
     // Gearbox ratio of arm motor <unitless>
-    public static final int kArmGearBoxRatio = 180;
+    public static final int kArmGearBoxRatio = 225;
 
-    public static final double kP = 4.5;
+    public static final double kP = 1.0;
 
     // The arm rotates from 0 upto 150 degrees
     // Calculate arm rotation distance in rotations <rotations> 
