@@ -25,7 +25,7 @@ public final class Constants
     // Gearbox ratio of arm motor <unitless>
     public static final int kArmGearBoxRatio = 180;
 
-    public static final double kP = 1.5;
+    public static final double kP = 4.5;
 
     // The arm rotates from 0 upto 150 degrees
     // Calculate arm rotation distance in rotations <rotations> 
@@ -42,7 +42,7 @@ public final class Constants
     // Arm initially in bucket.
     // We cannot retract the arm back to zero position once deployed
     // We can only move to safe distance above the bucket as it is a hard stop
-    public static final double kMinSafePosition = 35.0/360.0 * kArmGearBoxRatio;
+    public static final double kMinSafePosition = 30.0/360.0 * kArmGearBoxRatio;
 
     // Locaiton where frame lifts off the floor on the lift
     public static final double kLiftPosition = 25.0/360.0 * kArmGearBoxRatio;
@@ -58,7 +58,7 @@ public final class Constants
     public static final double kArmRpm = kArmRotationDistance/kArmRotationTime * 60;
     // The motor is on the other side of the gear box and runs faster than the arm
     // To calculate motor rpm multiple the arm rpm by the gearbox ratios <rpm>
-    public static final double kMotorRpm = 0.3*kArmRpm * kArmGearBoxRatio;
+    public static final double kMotorRpm = 0.4*kArmRpm * kArmGearBoxRatio;
     public static final double kMotorRpmAcc = 3*kMotorRpm/60;
 
      // start with 15 right, 16 left
