@@ -270,14 +270,14 @@ public class RobotContainer
     var alliance = DriverStation.getAlliance();
 
     //return drivebase.getAutonomousCommand("Strafe Auto");
-    /* 
+     
     if(alliance.isPresent()){
       if(alliance.get() == DriverStation.Alliance.Red){
-        return drivebase.getAutonomousCommand("Red Leave Auto");
+        return drivebase.driveToDistanceCommand(-1.0, 0.5);
       } else {
-        return drivebase.getAutonomousCommand("Leave Auto");
+        return drivebase.driveToDistanceCommand(-1.0, 0.5);
       }
-    }*/
+    }
   
     return drivebase.getAutonomousCommand("No Auto");
 
