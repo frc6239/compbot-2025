@@ -117,7 +117,7 @@ DigitalInput maxLimitSwitch = new DigitalInput(0);
 
      public void setGoal(double position){
       if (m_enabled == false) {
-        
+
       }
 
       else {
@@ -144,7 +144,7 @@ DigitalInput maxLimitSwitch = new DigitalInput(0);
         //FIX ME Need to verify limit switch
         //Default logic for digitalIO is high also true
         if (!maxLimitSwitch.get()) {
-          System.out.println("LimitSwitch toggle encoder is " + m_leftencoder.getPosition());
+          //System.out.println("LimitSwitch toggle encoder is " + m_leftencoder.getPosition());
           //m_controller.setGoal(25.5);
         }
 
