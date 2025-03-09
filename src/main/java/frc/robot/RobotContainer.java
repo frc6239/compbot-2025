@@ -275,7 +275,7 @@ public class RobotContainer
       if(alliance.get() == DriverStation.Alliance.Red){
         return drivebase.driveToDistanceCommand(-1.0, 0.5);
       } else {
-        return drivebase.driveToDistanceCommand(-1.0, 0.5);
+        return drivebase.driveToDistanceCommand(1.0, 0.5);
       }
     }
   
