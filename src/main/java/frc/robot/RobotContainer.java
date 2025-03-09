@@ -12,15 +12,19 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import java.io.File;
+import java.util.Map;
+
 import swervelib.SwerveInputStream;
 import frc.robot.subsystems.LEDController;
 import frc.robot.subsystems.Climber;
@@ -139,6 +143,21 @@ public class RobotContainer
         SmartDashboard.putData("Retract", Commands.runOnce(m_climberSubsystem::retract,m_climberSubsystem));
     }
 
+    Shuffleboard.getTab("Autonomous")
+    .addCamera("Driver Cam", "Climber", "mjpg:http://photonvision.local:1182/?sction=stream")
+    .withProperties(Map.of("showControls",false))
+    .withPosition(2, 0)
+    .withSize(3,3);
+
+    Shuffleboard.getTab("Autonomous")
+    .addCamera("Climb Cam", "Climber", "mjpg:http://photonvision.local:1181/?sction=stream")
+    .withProperties(Map.of("showControls",false))
+    .withPosition(2, 0)
+    .withSize(3,3);
+
+
+
+
   }
 
 
@@ -229,6 +248,7 @@ public class RobotContainer
       driverXbox.leftTrigger().onFalse(Commands.runOnce(() -> {m_OuttakeSubsystem.manualDisable();}, m_OuttakeSubsystem));
 
       driverXbox.y().onTrue(Commands.runOnce(() -> {drivebase.toggleDriveSpeed();}, drivebase));
+      driverXbox.leftStick().onTrue(new InstantCommand(()->drivebase.zeroGyro()));
     
 
     }
@@ -269,13 +289,16 @@ public class RobotContainer
   {
     var alliance = DriverStation.getAlliance();
 
+    //return drivebase.driveToDistanceCommand(1.0, 3.0);
+
+
     //return drivebase.getAutonomousCommand("Strafe Auto");
      
     /*if(alliance.isPresent()){
       if(alliance.get() == DriverStation.Alliance.Red){
-        return drivebase.driveToDistanceCommand(1.0, 0.5);
+        return drivebase.driveToDistanceCommand(1.0, -3.0);
       } else {
-        return drivebase.driveToDistanceCommand(1.0, 0.5);
+        return drivebase.driveToDistanceCommand(1.0, -3.0);
       }
     }*/
   
@@ -301,6 +324,7 @@ public class RobotContainer
     NamedCommands.registerCommand("Home", Commands.runOnce(m_ElevatorSubsystem::goToHome));
     NamedCommands.registerCommand("L2", Commands.runOnce(m_ElevatorSubsystem::goToL2));
     NamedCommands.registerCommand("L3", Commands.runOnce(m_ElevatorSubsystem::goToL3));
+    NamedCommands.registerCommand("ResetGyro", Commands.runOnce(drivebase::zeroGyroWithAlliance));
   }
 
 

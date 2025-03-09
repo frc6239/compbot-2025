@@ -9,6 +9,12 @@
           "data": {
             "pathName": "Leave Start"
           }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ResetGyro"
+          }
         }
       ]
     }
