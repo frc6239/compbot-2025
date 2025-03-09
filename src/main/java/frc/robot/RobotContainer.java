@@ -143,7 +143,7 @@ public class RobotContainer
         SmartDashboard.putData("Retract", Commands.runOnce(m_climberSubsystem::retract,m_climberSubsystem));
     }
 
-    Shuffleboard.getTab("Autonomous")
+    /*Shuffleboard.getTab("Autonomous")
     .addCamera("Driver Cam", "Climber", "mjpg:http://photonvision.local:1182/?sction=stream")
     .withProperties(Map.of("showControls",false))
     .withPosition(2, 0)
@@ -153,7 +153,7 @@ public class RobotContainer
     .addCamera("Climb Cam", "Climber", "mjpg:http://photonvision.local:1181/?sction=stream")
     .withProperties(Map.of("showControls",false))
     .withPosition(2, 0)
-    .withSize(3,3);
+    .withSize(3,3);*/
 
 
 
@@ -248,7 +248,7 @@ public class RobotContainer
       driverXbox.leftTrigger().onFalse(Commands.runOnce(() -> {m_OuttakeSubsystem.manualDisable();}, m_OuttakeSubsystem));
 
       driverXbox.y().onTrue(Commands.runOnce(() -> {drivebase.toggleDriveSpeed();}, drivebase));
-      driverXbox.leftStick().onTrue(new InstantCommand(()->drivebase.zeroGyro()));
+      driverXbox.rightStick().onTrue(new InstantCommand(()->drivebase.zeroGyro()));
     
 
     }

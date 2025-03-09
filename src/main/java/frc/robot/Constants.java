@@ -29,7 +29,7 @@ public final class Constants
 
     // The arm rotates from 0 upto 150 degrees
     // Calculate arm rotation distance in rotations <rotations> 
-    public static final double kArmRotationDistance = 135.0/360.0;
+    public static final double kArmRotationDistance = 137.0/360.0;
 
     // Set position ranges to rotate arm
     // Maximum we can go is above the rotation distance
@@ -37,7 +37,7 @@ public final class Constants
     public static final double kMaxPosition =(kArmRotationDistance + 0.0/360.0) * kArmGearBoxRatio;
 
     // Location where arm is deployed
-    public static final double kDeployPosition = 135.0/360.0 * kArmGearBoxRatio;//kArmRotationDistance * kArmGearBoxRatio;
+    public static final double kDeployPosition = 137.0/360.0 * kArmGearBoxRatio;//kArmRotationDistance * kArmGearBoxRatio;
 
     // Arm initially in bucket.
     // We cannot retract the arm back to zero position once deployed
