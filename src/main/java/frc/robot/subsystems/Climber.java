@@ -198,6 +198,7 @@ public class Climber extends SubsystemBase {
   public void lift() {
     if (m_enabled) {
       setPosition(ClimberConstants.kLiftPosition);
+      setPosition(ElevatorConstants.position_L2);
     } else {
       // send an alert
     }
