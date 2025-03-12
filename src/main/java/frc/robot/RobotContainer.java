@@ -324,7 +324,7 @@ public class RobotContainer
     NamedCommands.registerCommand("Home", Commands.runOnce(m_ElevatorSubsystem::goToHome));
     NamedCommands.registerCommand("L2", Commands.runOnce(m_ElevatorSubsystem::goToL2));
     NamedCommands.registerCommand("L3", Commands.runOnce(m_ElevatorSubsystem::goToL3));
-    NamedCommands.registerCommand("ResetGyro", Commands.runOnce(drivebase::zeroGyroWithAlliance));
+    NamedCommands.registerCommand("ResetGyro", Commands.runOnce(drivebase::zeroGyro));
   }
 
 
