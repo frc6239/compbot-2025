@@ -119,7 +119,7 @@ public final class Constants
 
     //height of coarl in inches
     public static final double L_2 = 18.5; 
-    public static final double L_3 = 33.5;
+    public static final double L_3 = 33.75;
 
 
     //DO NOT CHANGE pOffset
