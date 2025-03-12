@@ -7,7 +7,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Red Leave Start"
+            "pathName": "L2 Right"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ResetGyro"
           }
         }
       ]
