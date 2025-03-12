@@ -7,14 +7,21 @@ package frc.robot;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
+
+
+import org.photonvision.PhotonUtils;
+
 import com.revrobotics.spark.config.LimitSwitchConfig;
 import frc.robot.Constants.OuttakeConstants;
 import frc.robot.subsystems.Outtake;
+
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to each mode, as
@@ -26,6 +33,7 @@ public class Robot extends TimedRobot
   public boolean m_elevatorEnabled = true;
   private static Robot   instance;
   private        Command m_autonomousCommand;
+  private XboxController controller;
 
   private RobotContainer m_robotContainer;
   
@@ -41,6 +49,15 @@ public class Robot extends TimedRobot
   {
     return instance;
   }
+
+  double forward = -controller.getLeftY() * Constants.Swerve.kMaxLinearSpeed;
+    double strafe = -controller.getLeftX() * Constants.Swerve.kMaxLinearSpeed;
+    double turn = -controller.getRightX() * Constants.Swerve.kMaxAngularSpeed;
+
+        // Read in relevant data from the Camera
+        boolean targetVisible = false;
+        double targetYaw = 0.0;
+        double targetRange = 0.0;
 
   /**
    * This function is run when the robot is first started up and should be used for any initialization code.
@@ -197,6 +214,51 @@ public class Robot extends TimedRobot
        */
      // double targetPosition = SmartDashboard.getNumber("Target Position", 0);
      // m_robotContainer.m_climberSubsystem.setPosition(targetPosition); }
+
+
+
+
+    
+        var results = camera.getAllUnreadResults();
+        if (!results.isEmpty()) {
+            // Camera processed a new frame since last
+            // Get the last one in the list.
+            var result = results.get(results.size() - 1);
+            if (result.hasTargets()) {
+                // At least one AprilTag was seen by the camera
+                for (var target : result.getTargets()) {
+                    if (target.getFiducialId() == 7) {
+                        // Found Tag 7, record its information
+                        targetYaw = target.getYaw();
+                        targetRange =
+                                PhotonUtils.calculateDistanceToTargetMeters(
+                                        0.5, // Measured with a tape measure, or in CAD.
+                                        1.435, // From 2024 game manual for ID 7
+                                        Units.degreesToRadians(-30.0), // Measured with a protractor, or in CAD.
+                                        Units.degreesToRadians(target.getPitch()));
+
+                        targetVisible = true;
+                    }
+                }
+            }
+        }
+
+        // Auto-align when requested
+        if (controller.getAButton() && targetVisible) {
+            // Driver wants auto-alignment to tag 7
+            // And, tag 7 is in sight, so we can turn toward it.
+            // Override the driver's turn and fwd/rev command with an automatic one
+            // That turns toward the tag, and gets the range right.
+            turn =
+                    (VISION_DES_ANGLE_deg - targetYaw) * VISION_TURN_kP * Constants.Swerve.kMaxAngularSpeed;
+            forward =
+                    (VISION_DES_RANGE_m - targetRange) * VISION_STRAFE_kP * Constants.Swerve.kMaxLinearSpeed;
+        }
+
+        // Command drivetrain motors based on target speeds
+        drivetrain.drive(forward, strafe, turn);
+
+
       
   }
 
