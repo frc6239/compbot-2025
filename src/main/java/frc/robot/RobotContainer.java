@@ -270,6 +270,9 @@ public class RobotContainer
 
   public void configureDriveCommand() {
 
+    drivebase.setDefaultCommand(drivebase.driveFieldOriented(driveAngularVelocityBlue));
+    /*
+    // When PathPlanner is not used code below needed to invert controls for case of red aliance  
     var alliance = DriverStation.getAlliance();
             if (alliance.isPresent())
             {
@@ -280,7 +283,7 @@ public class RobotContainer
                 drivebase.setDefaultCommand(drivebase.driveFieldOriented(driveAngularVelocityBlue));
               }
             }
-
+    */
   }
 
   
