@@ -343,17 +343,17 @@ public class RobotContainer
   private void configureCameraServer() {
 
     CameraServer.startAutomaticCapture();
-    HttpCamera httpCameraDrive = new HttpCamera("DriveCam", "http://photonvision.local:1184/stream.mjpg");
+    //HttpCamera httpCameraDrive = new HttpCamera("DriveCam", "http://photonvision.local:1184/stream.mjpg");
     HttpCamera httpCameraClimber = new HttpCamera("ClimbCam", "http://photonvision.local:1182/stream.mjpg");
     HttpCamera httpCameraReef = new HttpCamera("ReefCam", "http://photonvision.local:1186/stream.mjpg");
 
     httpCameraClimber.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
-    httpCameraDrive.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
+    //httpCameraDrive.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
     httpCameraReef.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
     
   
-    Shuffleboard.getTab("Camera")
-    .add(httpCameraDrive);
+    //Shuffleboard.getTab("Camera")
+    //.add(httpCameraDrive);
 
     Shuffleboard.getTab("Camera")
     .add(httpCameraClimber);
