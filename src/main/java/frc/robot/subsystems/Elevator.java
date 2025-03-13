@@ -55,7 +55,6 @@ private LimitSwitchConfig m_levelTwoLimitSwitch;
 private RelativeEncoder m_leftencoder;
 private RelativeEncoder m_rightencoder;
 
-public boolean m_elevatorEnabled = true;
 
 //Limit switch for the max height
 DigitalInput maxLimitSwitch = new DigitalInput(0);
@@ -117,11 +116,12 @@ DigitalInput maxLimitSwitch = new DigitalInput(0);
 
      public void setGoal(double position){
       if (m_enabled == false) {
-
+        System.out.println("elevator: cannot raise m_enabled is " + m_enabled);
       }
 
       else {
         //Max height of the elevator is 25.5
+        
         if (position >= 25.75) {
           m_controller.setGoal(25.75);
           System.out.println("Goal is above max height");
@@ -133,6 +133,7 @@ DigitalInput maxLimitSwitch = new DigitalInput(0);
         }
         else {
           m_controller.setGoal(position);
+          System.out.println("elevator: can raise m_enabled is " + m_enabled);
         }
       }
      }
@@ -161,20 +162,16 @@ DigitalInput maxLimitSwitch = new DigitalInput(0);
 
     }
 
-    public void enableElevator(boolean isEnabled) {
-      m_elevatorEnabled = isEnabled;
-  }
-
   public boolean isEnabled() {
-    return m_elevatorEnabled;
+    return m_enabled;
   }
 
   public void disableElevator() {
-    m_elevatorEnabled = false;
+    m_enabled = false;
 }
 
 public void enableElevator() {
-  m_elevatorEnabled = true;
+  m_enabled = true;
 }
 
      

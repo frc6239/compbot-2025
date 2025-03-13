@@ -175,16 +175,19 @@ public class Robot extends TimedRobot
   {
 
      // Check the state of the beam break sensor
-     if (m_robotContainer.m_OuttakeSubsystem.beamBreakCleared()) {
+     if (m_robotContainer.m_OuttakeSubsystem.beamBreakCleared() == true) {
       // if beam is clear, enable elevator
       m_elevatorEnabled = true;  // Motor stops
       m_robotContainer.m_ElevatorSubsystem.enableElevator();
       m_robotContainer.m_LedController.set_Green();
+
+    //System.out.println("elevator enabled " + m_elevatorEnabled);
   } else {
     // If beam is blocked, disable elevator
     m_elevatorEnabled = false;
     m_robotContainer.m_ElevatorSubsystem.disableElevator();
     m_robotContainer.m_LedController.set_RedOrange();
+    //System.out.println("elevator enabled " + m_elevatorEnabled);
   
   }
   m_robotContainer.m_scaleSpeed = m_robotContainer.drivebase.getScaleSpeed();

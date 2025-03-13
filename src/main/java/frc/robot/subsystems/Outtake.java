@@ -20,8 +20,8 @@ import frc.robot.Constants.OuttakeConstants;;
 public class Outtake extends SubsystemBase{
 //Instance Variables
 
-    private DigitalInput outtakeLimitSwitch = new DigitalInput(1);
-    DigitalInput LEDTransmiter = new DigitalInput(2);
+    public DigitalInput outtakeBeamBreak = new DigitalInput(1);
+    public DigitalInput LEDTransmiter = new DigitalInput(2);
     private SparkMax m_leftMotor;
     private SparkMax m_rightMotor;
     private LimitSwitchConfig m_levelOneLimitSwitch;
@@ -87,7 +87,7 @@ public class Outtake extends SubsystemBase{
     
       public boolean beamBreakCleared() {
 
-        return outtakeLimitSwitch.get();  // Return true if beam is cleared (no game piece), false if blocked
+        return outtakeBeamBreak.get();  // Return true if beam is cleared (no game piece), false if blocked
     }
 
 
@@ -96,13 +96,13 @@ public class Outtake extends SubsystemBase{
         // This method will be called once per scheduler run
 
         //System.out.println("sensor value " + outtakeLimitSwitch.get());
-        if ((outtakeLimitSwitch.get() == false) && (m_manualControl == false)){
+        if ((beamBreakCleared() == false) && (m_manualControl == false)){
           feedCoral();
           //System.out.println("Feeding");
          
         }
         
-        if ((outtakeLimitSwitch.get() == true) && (m_manualControl == false)){
+        if ((beamBreakCleared() == true) && (m_manualControl == false)){
           disable();
         }
 
