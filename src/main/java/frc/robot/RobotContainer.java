@@ -336,8 +336,8 @@ public class RobotContainer
 
 
     CameraServer.startAutomaticCapture();
-    HttpCamera httpCameraDrive = new HttpCamera("DriveCam", "http://frcvision.local:1181/stream.mjpg");
-    HttpCamera httpCameraClimber = new HttpCamera("ClimbCam", "http://frcvision.local:1182/stream.mjpg");
+    HttpCamera httpCameraDrive = new HttpCamera("DriveCam", "http://photonvision.local:1184/stream.mjpg");
+    HttpCamera httpCameraClimber = new HttpCamera("ClimbCam", "http://photonvision.local:1182/stream.mjpg");
     CameraServer.addCamera(httpCameraDrive);
     CameraServer.addCamera(httpCameraClimber);
     
