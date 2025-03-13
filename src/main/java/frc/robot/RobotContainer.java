@@ -234,7 +234,7 @@ public class RobotContainer
       driverXbox.povRight().onTrue(Commands.runOnce(() -> { m_climberSubsystem.setPosition(ClimberConstants.kDeployPosition);}, m_climberSubsystem));
       driverXbox.povLeft().onTrue(Commands.runOnce(() -> { m_climberSubsystem.setPosition(ClimberConstants.kLiftPosition);}, m_climberSubsystem));
       driverXbox.povLeft().onTrue(Commands.runOnce(() -> {m_ElevatorSubsystem.setGoal(ElevatorConstants.position_L2);}, m_ElevatorSubsystem));
-      driverXbox.povUp().onTrue(Commands.runOnce(() -> { m_climberSubsystem.raise();}, m_climberSubsystem));
+      driverXbox.povUp().onTrue(Commands.runOnce(() -> { m_climberSubsystem.setPosition(ClimberConstants.kPreLatchPosition);}, m_climberSubsystem));
       driverXbox.povDown().onTrue(Commands.runOnce(() -> { m_climberSubsystem.lower();}, m_climberSubsystem));
 
       //Elevator Buttons
@@ -249,7 +249,7 @@ public class RobotContainer
       driverXbox.leftTrigger().onFalse(Commands.runOnce(() -> {m_OuttakeSubsystem.manualDisable();}, m_OuttakeSubsystem));
 
       driverXbox.y().onTrue(Commands.runOnce(() -> {drivebase.toggleDriveSpeed();}, drivebase));
-      driverXbox.rightStick().onTrue(new InstantCommand(()->drivebase.zeroGyro()));
+      driverXbox.back().onTrue(new InstantCommand(()->drivebase.zeroGyro()));
     
 
     }

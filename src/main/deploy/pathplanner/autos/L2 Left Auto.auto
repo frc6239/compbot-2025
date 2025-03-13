@@ -9,12 +9,6 @@
           "data": {
             "pathName": "L2 Left"
           }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ResetGyro"
-          }
         }
       ]
     }

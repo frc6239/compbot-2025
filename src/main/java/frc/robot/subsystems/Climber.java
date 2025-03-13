@@ -114,7 +114,7 @@ public class Climber extends SubsystemBase {
     // Initialize dashboard values
     SmartDashboard.setDefaultNumber("Arm Increment", ClimberConstants.kArmIncrement);
     
-    SmartDashboard.setDefaultNumber("Target Position", ClimberConstants.kMinSafePosition);
+    SmartDashboard.setDefaultNumber("Target Position", ClimberConstants.kPreLatchPosition);
     SmartDashboard.setDefaultBoolean("Arm Enabled", true);
     SmartDashboard.setDefaultBoolean("Reset Encoder", false);
 
@@ -206,7 +206,7 @@ public class Climber extends SubsystemBase {
 
   public void retract() {
     if (m_enabled) {
-      setPosition(ClimberConstants.kMinSafePosition);
+      setPosition(ClimberConstants.kPreLatchPosition);
     } else { 
       // send an alert
     }

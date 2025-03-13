@@ -122,8 +122,8 @@ DigitalInput maxLimitSwitch = new DigitalInput(0);
 
       else {
         //Max height of the elevator is 25.5
-        if (position >= 25.5) {
-          m_controller.setGoal(25.5);
+        if (position >= 25.75) {
+          m_controller.setGoal(25.75);
           System.out.println("Goal is above max height");
         }
         //Min height of the elevator is 0

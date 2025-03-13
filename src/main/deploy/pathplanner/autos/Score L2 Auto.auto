@@ -9,12 +9,6 @@
           "data": {
             "pathName": "Score L2 Path (No Middle Dont Use"
           }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ResetGyro"
-          }
         }
       ]
     }
