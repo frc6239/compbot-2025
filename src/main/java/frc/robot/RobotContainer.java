@@ -6,6 +6,9 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import com.pathplanner.lib.auto.NamedCommands;
+
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.HttpCamera;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -126,6 +129,7 @@ public class RobotContainer
     configureBindings();
     configurePathPlannerCommands();
     configureSmartDashboard();
+    configureCameraServer();
     m_scaleSpeed = DrivebaseConstants.FAST_SPEED;
 
     DriverStation.silenceJoystickConnectionWarning(true);
@@ -328,5 +332,20 @@ public class RobotContainer
     NamedCommands.registerCommand("ResetGyro", Commands.runOnce(drivebase::zeroGyro));
   }
 
+  private void configureCameraServer() {
 
+
+    CameraServer.startAutomaticCapture();
+    HttpCamera httpCameraDrive = new HttpCamera("DriveCam", "http://frcvision.local:1181/stream.mjpg");
+    HttpCamera httpCameraClimber = new HttpCamera("ClimbCam", "http://frcvision.local:1182/stream.mjpg");
+    CameraServer.addCamera(httpCameraDrive);
+    CameraServer.addCamera(httpCameraClimber);
+    
+    Shuffleboard.getTab("Camera")
+    .add(httpCameraDrive);
+
+    Shuffleboard.getTab("Camera")
+    .add(httpCameraClimber);
+
+  }
 }
