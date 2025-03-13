@@ -3,12 +3,12 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.518579545454545,
+        "x": 6.784,
         "y": 3.9601846590909093
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.830539772727272,
+        "x": 6.095960227272727,
         "y": 3.8804119318181813
       },
       "isLocked": false,
@@ -33,11 +33,11 @@
     {
       "anchor": {
         "x": 5.743636363636364,
-        "y": 5.017173295454545
+        "y": 4.96
       },
       "prevControl": {
         "x": 5.773551136363636,
-        "y": 4.478707386363635
+        "y": 4.42153409090909
       },
       "nextControl": null,
       "isLocked": false,
@@ -53,19 +53,50 @@
       "waypointRelativePos": 1.0,
       "endWaypointRelativePos": null,
       "command": {
-        "type": "sequential",
+        "type": "parallel",
         "data": {
           "commands": [
             {
-              "type": "named",
+              "type": "wait",
               "data": {
-                "name": "Enable Outtake"
+                "waitTime": 5.0
               }
             },
             {
-              "type": "wait",
+              "type": "sequential",
               "data": {
-                "waitTime": 0.5
+                "commands": [
+                  {
+                    "type": "named",
+                    "data": {
+                      "name": "Enable Outtake"
+                    }
+                  },
+                  {
+                    "type": "named",
+                    "data": {
+                      "name": "Slow Score"
+                    }
+                  },
+                  {
+                    "type": "wait",
+                    "data": {
+                      "waitTime": 0.5
+                    }
+                  },
+                  {
+                    "type": "named",
+                    "data": {
+                      "name": "Disable Outtake"
+                    }
+                  },
+                  {
+                    "type": "wait",
+                    "data": {
+                      "waitTime": 0.5
+                    }
+                  }
+                ]
               }
             }
           ]
@@ -74,7 +105,7 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 3.0,
+    "maxVelocity": 0.5,
     "maxAcceleration": 1.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
@@ -91,5 +122,5 @@
     "velocity": 0,
     "rotation": 0.0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

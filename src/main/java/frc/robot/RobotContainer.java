@@ -307,7 +307,7 @@ public class RobotContainer
       }
     }*/
   
-    return drivebase.getAutonomousCommand("Leave Auto");
+    return drivebase.getAutonomousCommand("L1 Auto");
 
 
 
@@ -325,11 +325,14 @@ public class RobotContainer
 
   private void configurePathPlannerCommands() {
     NamedCommands.registerCommand("Enable Outtake", Commands.runOnce(m_OuttakeSubsystem::enable));
-    NamedCommands.registerCommand("Disable Outtake", Commands.runOnce(m_OuttakeSubsystem::disable));
+    NamedCommands.registerCommand("Disable Outtake", Commands.runOnce(m_OuttakeSubsystem::manualDisable));
+    NamedCommands.registerCommand("Score", Commands.runOnce(m_OuttakeSubsystem::manualShootCoral));
+    NamedCommands.registerCommand("Slow Score", Commands.runOnce(m_OuttakeSubsystem::manualFeedCoral));
     NamedCommands.registerCommand("Home", Commands.runOnce(m_ElevatorSubsystem::goToHome));
     NamedCommands.registerCommand("L2", Commands.runOnce(m_ElevatorSubsystem::goToL2));
     NamedCommands.registerCommand("L3", Commands.runOnce(m_ElevatorSubsystem::goToL3));
     NamedCommands.registerCommand("ResetGyro", Commands.runOnce(drivebase::zeroGyro));
+
   }
 
   private void configureCameraServer() {

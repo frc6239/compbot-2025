@@ -115,6 +115,7 @@ public class Outtake extends SubsystemBase{
     
       public void enable () {
         m_running = true;
+        System.out.println("enabled");
       }
     
       public void disable () {
@@ -132,6 +133,7 @@ public class Outtake extends SubsystemBase{
       public void shootCoral() {
           m_speed = OuttakeConstants.kCoralShootSpeed;
           enable();
+          System.out.println("shooting");
         }
       
     
