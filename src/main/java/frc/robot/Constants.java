@@ -118,7 +118,7 @@ public final class Constants
     public static final double kV = 0.4;//1.3;
 
     //height of coarl in inches
-    public static final double L_2 = 18.5; 
+    public static final double L_2 = 19.0; 
     public static final double L_3 = 33.75;
 
 
