@@ -131,7 +131,11 @@ public class RobotContainer
     configureBindings();
     configurePathPlannerCommands();
     configureSmartDashboard();
-    configureCameraServer();
+   
+    // We are displaying cameras via HTML webpage located under
+    // shuffleboard/6239_Cameras.html
+    // Turnning off cameras from going to shuffleboard
+    //configureCameraServer();
     m_scaleSpeed = DrivebaseConstants.FAST_SPEED;
 
     DriverStation.silenceJoystickConnectionWarning(true);
