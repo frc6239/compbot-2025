@@ -29,7 +29,7 @@ public final class Constants
 
     // The arm rotates from 0 upto 150 degrees
     // Calculate arm rotation distance in rotations <rotations> 
-    public static final double kArmRotationDistance = 140.0/360.0;
+    public static final double kArmRotationDistance = 138.0/360.0;
 
     // Set position ranges to rotate arm
     // Maximum we can go is above the rotation distance
@@ -37,7 +37,7 @@ public final class Constants
     public static final double kMaxPosition =(kArmRotationDistance + 0.0/360.0) * kArmGearBoxRatio;
 
     // Location where arm is deployed
-    public static final double kDeployPosition = 140.0/360.0 * kArmGearBoxRatio;//kArmRotationDistance * kArmGearBoxRatio;
+    public static final double kDeployPosition = 138.0/360.0 * kArmGearBoxRatio;//kArmRotationDistance * kArmGearBoxRatio;
 
     // Arm initially in bucket.
     // We cannot retract the arm back to zero position once deployed
@@ -45,7 +45,7 @@ public final class Constants
     public static final double kPreLatchPosition = 75.0/360.0 * kArmGearBoxRatio;
 
     // Locaiton where frame lifts off the floor on the lift
-    public static final double kLiftPosition = 25.0/360.0 * kArmGearBoxRatio;
+    public static final double kLiftPosition = 29.0/360.0 * kArmGearBoxRatio;
 
     // Set initial arm increment
     public static final double kArmIncrement = 10.0 / 360.0 * kArmGearBoxRatio;
@@ -120,7 +120,7 @@ public final class Constants
     //height of coarl in inches
     public static final double L_2 = 19.0; 
     public static final double L_3 = 33.75;
-    public static final double L_Climb = 25.0;
+    public static final double L_Climb = 22.0;
 
 
     //DO NOT CHANGE pOffset
