@@ -243,7 +243,7 @@ public class RobotContainer
       //Climber Buttons
       driverXbox.povRight().onTrue(Commands.runOnce(() -> { m_climberSubsystem.setPosition(ClimberConstants.kDeployPosition);}, m_climberSubsystem));
       driverXbox.povLeft().onTrue(Commands.runOnce(() -> { m_climberSubsystem.setPosition(ClimberConstants.kLiftPosition);}, m_climberSubsystem));
-      driverXbox.povLeft().onTrue(Commands.runOnce(() -> {m_ElevatorSubsystem.setGoal(ElevatorConstants.position_L2);}, m_ElevatorSubsystem));
+      driverXbox.povLeft().onTrue(Commands.runOnce(() -> {m_ElevatorSubsystem.setGoal(ElevatorConstants.position_Climb);}, m_ElevatorSubsystem));
       driverXbox.povUp().onTrue(Commands.runOnce(() -> { m_climberSubsystem.setPosition(ClimberConstants.kPreLatchPosition);}, m_climberSubsystem));
       driverXbox.povDown().onTrue(Commands.runOnce(() -> { m_climberSubsystem.lower();}, m_climberSubsystem));
 

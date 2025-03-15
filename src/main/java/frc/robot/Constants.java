@@ -120,6 +120,7 @@ public final class Constants
     //height of coarl in inches
     public static final double L_2 = 19.0; 
     public static final double L_3 = 33.75;
+    public static final double L_Climb = 25.0;
 
 
     //DO NOT CHANGE pOffset
@@ -129,6 +130,7 @@ public final class Constants
     public static final double position_Home = 0.0;
     public static final double position_L2 = (L_2-pOffset);
     public static final double position_L3 = (L_3-pOffset);
+    public static final double position_Climb = (L_Climb-pOffset);
     
 
     
