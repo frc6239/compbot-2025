@@ -76,8 +76,8 @@ public class RobotContainer
                                                             .allianceRelativeControl(true);
 
   SwerveInputStream driveAngularVelocityRed = SwerveInputStream.of(drivebase.getSwerveDrive(),
-                                                                () -> driverXbox.getLeftY() * 1 * m_scaleSpeed,
-                                                                () -> driverXbox.getLeftX() * 1 * m_scaleSpeed)
+                                                                () -> driverXbox.getLeftY() * -1 * m_scaleSpeed,
+                                                                () -> driverXbox.getLeftX() * -1 * m_scaleSpeed)
                                                             .withControllerRotationAxis(() -> driverXbox.getRightX() * -1)
                                                             .deadband(OperatorConstants.DEADBAND)
                                                             .scaleTranslation(0.8)
@@ -276,8 +276,8 @@ public class RobotContainer
 
   public void configureDriveCommand() {
 
-    drivebase.setDefaultCommand(drivebase.driveFieldOriented(driveAngularVelocityBlue));
-    /*
+    //drivebase.setDefaultCommand(drivebase.driveFieldOriented(driveAngularVelocityBlue));
+    
     // When PathPlanner is not used code below needed to invert controls for case of red aliance  
     var alliance = DriverStation.getAlliance();
             if (alliance.isPresent())
@@ -289,7 +289,7 @@ public class RobotContainer
                 drivebase.setDefaultCommand(drivebase.driveFieldOriented(driveAngularVelocityBlue));
               }
             }
-    */
+    
   }
 
   
@@ -316,7 +316,7 @@ public class RobotContainer
       }
     }*/
   
-    return drivebase.getAutonomousCommand("Leave Auto");
+    return drivebase.getAutonomousCommand("L1 Auto");
 
 
 
