@@ -6,35 +6,40 @@
     "GLOBAL": {
       "font": "Proggy Dotted",
       "fps": "120",
-      "height": "1494",
+      "height": "1051",
       "maximized": "1",
       "style": "0",
       "userScale": "2",
-      "width": "2560",
+      "width": "1920",
       "xpos": "0",
-      "ypos": "34"
+      "ypos": "29"
     }
   },
   "Window": {
     "###/FMSInfo": {
       "Collapsed": "0",
       "Pos": "938,168",
-      "Size": "254,221"
+      "Size": "217,194"
+    },
+    "###/Shuffleboard/Configuration/Auto Path Command": {
+      "Collapsed": "0",
+      "Pos": "187,20",
+      "Size": "421,60"
     },
     "###/SmartDashboard/Field": {
       "Collapsed": "0",
-      "Pos": "1227,68",
+      "Pos": "874,51",
       "Size": "1212,546"
     },
     "###FMS": {
       "Collapsed": "0",
       "Pos": "4,414",
-      "Size": "235,244"
+      "Size": "202,214"
     },
     "###Joysticks": {
       "Collapsed": "0",
-      "Pos": "1025,716",
-      "Size": "1156,316"
+      "Pos": "805,574",
+      "Size": "976,102"
     },
     "###Keyboard 0 Settings": {
       "Collapsed": "0",
@@ -47,24 +52,24 @@
       "Size": "750,252"
     },
     "###NetworkTables Info": {
-      "Collapsed": "1",
+      "Collapsed": "0",
       "Pos": "129,88",
       "Size": "750,145"
     },
     "###Other Devices": {
       "Collapsed": "0",
-      "Pos": "2214,766",
+      "Pos": "1360,793",
       "Size": "250,695"
     },
     "###System Joysticks": {
       "Collapsed": "0",
-      "Pos": "174,1060",
-      "Size": "273,290"
+      "Pos": "27,636",
+      "Size": "232,254"
     },
     "###Timing": {
       "Collapsed": "0",
       "Pos": "5,150",
-      "Size": "188,244"
+      "Size": "162,220"
     },
     "Debug##Default": {
       "Collapsed": "0",
@@ -74,7 +79,7 @@
     "Robot State": {
       "Collapsed": "0",
       "Pos": "7,20",
-      "Size": "137,152"
+      "Size": "118,134"
     }
   }
 }

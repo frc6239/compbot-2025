@@ -17,9 +17,20 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
+
+//START CONFIG AUTOCHOOSER
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
+//END CONFIG AUTOCHOOSER
+
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
+
+//START CONFIG AUTOCHOOSER
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+//END CONFIG AUTOCHOOSER
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
@@ -28,6 +39,11 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import java.io.File;
+
+//START CONFIG AUTOCHOOSER
+import java.util.List;
+//END CONFIG AUTOCHOOSER
+
 import java.util.Map;
 
 import swervelib.SwerveInputStream;
@@ -62,6 +78,19 @@ public class RobotContainer
   public final SwerveSubsystem       drivebase  = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
                                                                                 "swerve/neo.6239"));
   public LEDController m_LedController = new LEDController();
+
+  //START CONFIG AUTOCHOOSER
+
+  // SmartDashboard Widget
+  private ComplexWidget m_autoSelectionComplexWidget;
+  
+  private String m_autopathselected;
+  private final SendableChooser<String> m_chooser = new SendableChooser<>();
+
+  // Holds names of paths for autonomous
+  private List<String> pathNames;
+
+  //END CONFIG AUTOCHOOSER
 
   /**
    * Converts driver input into a field-relative ChassisSpeeds that is controlled by angular velocity.
@@ -132,6 +161,10 @@ public class RobotContainer
     configurePathPlannerCommands();
     configureSmartDashboard();
    
+    //START CONFIG AUTOCHOOSER
+    configureAutoPathChooser();
+    //STOP CONFIG AUTOCHOOSER
+
     // We are displaying cameras via HTML webpage located under
     // shuffleboard/6239_Cameras.html
     // Turnning off cameras from going to shuffleboard
@@ -303,6 +336,16 @@ public class RobotContainer
   {
     var alliance = DriverStation.getAlliance();
 
+    //START CONFIG AUTOCHOOSER
+    // Get the user autonomous path selection from the dashboard
+    m_autopathselected =m_chooser.getSelected();
+   
+    System.out.println("Auto Path selected: " + m_autopathselected);
+
+    // An example command will be run in autonomous
+    return drivebase.getAutonomousCommand(m_autopathselected);
+    //END COFING AUTOCHOOS
+
     //return drivebase.driveToDistanceCommand(1.0, 3.0);
 
 
@@ -316,7 +359,7 @@ public class RobotContainer
       }
     }*/
   
-    return drivebase.getAutonomousCommand("Leave Auto");
+    //return drivebase.getAutonomousCommand("Leave Auto");
 
 
 
@@ -366,4 +409,38 @@ public class RobotContainer
     .add(httpCameraReef);
 
   }
+
+  //START CONFIG AUTOCHOOSER
+  private void configureAutoPathChooser() {
+    // Get names of all of the paths
+    pathNames = AutoBuilder.getAllAutoNames();
+
+    // Iterate list of pathnames and add them as choices on Shuffleboard
+    for (int i=0; i< pathNames.size(); i++) {
+      m_chooser.addOption(pathNames.get(i),pathNames.get(i));
+      //m_chooser_smartdashboard.addOption(pathNames.get(i), pathNames.get(i));
+    }
+
+    // Set default option to be the first element
+    // FIXME:  Matt to create Default path and hard code Default string below
+    m_chooser.setDefaultOption("Leave Auto","Leave Auto");
+    //m_chooser_smartdashboard.setDefaultOption(pathNames.get(0), pathNames.get(0));
+
+    
+    // Put the Autonomous chooser on SmartDashboard 
+    SmartDashboard.putData("Auto Command", m_chooser);
+   
+     
+       
+    // Put the Autonomous chooser on the Shuffleboard
+    m_autoSelectionComplexWidget = Shuffleboard.getTab("Configuration")
+      .add("Auto Path Command", m_chooser)
+      .withSize(2, 1)
+      .withPosition(0, 0)
+      .withWidget(BuiltInWidgets.kComboBoxChooser);
+
+  
+  }
+  //END CONFIG AUTOCHOOSER
+
 }
