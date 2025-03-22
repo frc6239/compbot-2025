@@ -105,8 +105,8 @@ public class RobotContainer
                                                             .allianceRelativeControl(true);
 
   SwerveInputStream driveAngularVelocityRed = SwerveInputStream.of(drivebase.getSwerveDrive(),
-                                                                () -> driverXbox.getLeftY() * 1 * m_scaleSpeed,
-                                                                () -> driverXbox.getLeftX() * 1 * m_scaleSpeed)
+                                                                () -> driverXbox.getLeftY() * -1 * m_scaleSpeed,
+                                                                () -> driverXbox.getLeftX() * -1 * m_scaleSpeed)
                                                             .withControllerRotationAxis(() -> driverXbox.getRightX() * -1)
                                                             .deadband(OperatorConstants.DEADBAND)
                                                             .scaleTranslation(0.8)
@@ -276,7 +276,7 @@ public class RobotContainer
       //Climber Buttons
       driverXbox.povRight().onTrue(Commands.runOnce(() -> { m_climberSubsystem.setPosition(ClimberConstants.kDeployPosition);}, m_climberSubsystem));
       driverXbox.povLeft().onTrue(Commands.runOnce(() -> { m_climberSubsystem.setPosition(ClimberConstants.kLiftPosition);}, m_climberSubsystem));
-      driverXbox.povLeft().onTrue(Commands.runOnce(() -> {m_ElevatorSubsystem.setGoal(ElevatorConstants.position_L2);}, m_ElevatorSubsystem));
+      driverXbox.povLeft().onTrue(Commands.runOnce(() -> {m_ElevatorSubsystem.setGoal(ElevatorConstants.position_Climb);}, m_ElevatorSubsystem));
       driverXbox.povUp().onTrue(Commands.runOnce(() -> { m_climberSubsystem.setPosition(ClimberConstants.kPreLatchPosition);}, m_climberSubsystem));
       driverXbox.povDown().onTrue(Commands.runOnce(() -> { m_climberSubsystem.lower();}, m_climberSubsystem));
 
@@ -309,8 +309,8 @@ public class RobotContainer
 
   public void configureDriveCommand() {
 
-    drivebase.setDefaultCommand(drivebase.driveFieldOriented(driveAngularVelocityBlue));
-    /*
+    //drivebase.setDefaultCommand(drivebase.driveFieldOriented(driveAngularVelocityBlue));
+    
     // When PathPlanner is not used code below needed to invert controls for case of red aliance  
     var alliance = DriverStation.getAlliance();
             if (alliance.isPresent())
@@ -322,7 +322,7 @@ public class RobotContainer
                 drivebase.setDefaultCommand(drivebase.driveFieldOriented(driveAngularVelocityBlue));
               }
             }
-    */
+    
   }
 
   
