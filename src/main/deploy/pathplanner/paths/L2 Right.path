@@ -3,53 +3,58 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.608323863636363,
-        "y": 1.7464914772727262
+        "x": 7.495312499999999,
+        "y": 1.985197368421053
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.70375,
-        "y": 1.427400568181819
+        "x": 7.033470394736842,
+        "y": 1.985197368421053
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 6.021916390728475,
-        "y": 3.974151490066225
+        "x": 5.147615131578947,
+        "y": 2.880016447368421
       },
       "prevControl": {
-        "x": 6.2388323846800535,
-        "y": 4.786195980243932
+        "x": 5.311184210526315,
+        "y": 2.5432565789473687
       },
       "nextControl": {
-        "x": 5.738617549668874,
-        "y": 2.913596854304635
+        "x": 4.993674714269836,
+        "y": 3.196952600651885
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 6.690211092715232,
-        "y": 0.5745653973509923
+        "x": 5.7056743421052625,
+        "y": 1.3020559210526312
       },
       "prevControl": {
-        "x": 6.196254139072847,
-        "y": 2.208981788079469
+        "x": 5.619078947368421,
+        "y": 1.7350328947368416
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1.0,
+      "rotationDegrees": -59.99999999999999
+    }
+  ],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "Score Coral",
+      "name": "Score",
       "waypointRelativePos": 1.0,
       "endWaypointRelativePos": null,
       "command": {
@@ -57,21 +62,15 @@
         "data": {
           "commands": [
             {
-              "type": "named",
-              "data": {
-                "name": "GotoL1"
-              }
-            },
-            {
               "type": "wait",
               "data": {
-                "waitTime": 2.0
+                "waitTime": 1.0
               }
             },
             {
               "type": "named",
               "data": {
-                "name": "Activate Outake"
+                "name": "L2"
               }
             },
             {
@@ -83,13 +82,19 @@
             {
               "type": "named",
               "data": {
-                "name": "Deactivate Outake"
+                "name": "Enable Outtake"
+              }
+            },
+            {
+              "type": "wait",
+              "data": {
+                "waitTime": 0.5
               }
             },
             {
               "type": "named",
               "data": {
-                "name": "GotoHome"
+                "name": "Home"
               }
             },
             {
@@ -105,7 +110,7 @@
   ],
   "globalConstraints": {
     "maxVelocity": 3.0,
-    "maxAcceleration": 3.0,
+    "maxAcceleration": 1.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -113,13 +118,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": 0.0
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": 0.0
   },
   "useDefaultConstraints": true
 }

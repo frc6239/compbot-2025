@@ -10,6 +10,11 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import com.revrobotics.spark.config.LimitSwitchConfig;
+import frc.robot.Constants.OuttakeConstants;
+import frc.robot.subsystems.Outtake;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to each mode, as
@@ -18,11 +23,12 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  */
 public class Robot extends TimedRobot
 {
-
+  public boolean m_elevatorEnabled = true;
   private static Robot   instance;
   private        Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+  
 
   private Timer disabledTimer;
 
@@ -42,9 +48,11 @@ public class Robot extends TimedRobot
   @Override
   public void robotInit()
   {
+  
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    m_robotContainer.m_LedController.set_Orange();
 
     // Create a timer to disable motor brake a few seconds after disable.  This will let the robot stop
     // immediately when disabled, but then also let it be pushed more 
@@ -68,20 +76,8 @@ public class Robot extends TimedRobot
   {
      SmartDashboard.putNumber("Actual Position", m_robotContainer.m_climberSubsystem.getPosition());
     SmartDashboard.putNumber( "Actual Velocity", m_robotContainer.m_climberSubsystem.getVelocity());
+    SmartDashboard.putNumber( "Drive Scaled Speed", m_robotContainer.drivebase.getScaleSpeed());
 
-    /*
-    if (SmartDashboard.getBoolean("Reset Encoder", false)) {
-      SmartDashboard.putBoolean("Reset Encoder", false);
-      // Reset the encoder position to 0
-      m_robotContainer.m_climberSubsystem.resetEncoder();
-    }
-    if (SmartDashboard.getBoolean("Arm Enabled", true)) {
-      m_robotContainer.m_climberSubsystem.Enabled();
-      
-    } else {
-      m_robotContainer.m_climberSubsystem.disabled();
-    }
-      */
 
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
     // commands, running already-scheduled commands, removing finished or interrupted commands,
@@ -117,6 +113,7 @@ public class Robot extends TimedRobot
   @Override
   public void autonomousInit()
   {
+    m_robotContainer.drivebase.zeroGyro();
     m_robotContainer.setMotorBrake(true);
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
@@ -133,6 +130,19 @@ public class Robot extends TimedRobot
   @Override
   public void autonomousPeriodic()
   {
+     // Check the state of the beam break sensor
+     if (m_robotContainer.m_OuttakeSubsystem.beamBreakCleared()) {
+      // if beam is clear, enable elevator
+      m_elevatorEnabled = true;  // Motor stops
+      m_robotContainer.m_ElevatorSubsystem.enableElevator();
+      m_robotContainer.m_LedController.set_Green();
+  } else {
+    // If beam is blocked, disable elevator
+    m_elevatorEnabled = false;
+    m_robotContainer.m_ElevatorSubsystem.disableElevator();
+    m_robotContainer.m_LedController.set_RedOrange();
+  
+  }
   }
 
   @Override
@@ -142,6 +152,9 @@ public class Robot extends TimedRobot
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
+
+    m_robotContainer.configureDriveCommand();
+
     if (m_autonomousCommand != null)
     {
       m_autonomousCommand.cancel();
@@ -149,6 +162,9 @@ public class Robot extends TimedRobot
     {
       CommandScheduler.getInstance().cancelAll();
     }
+
+    
+    
   }
 
   /**
@@ -157,6 +173,26 @@ public class Robot extends TimedRobot
   @Override
   public void teleopPeriodic()
   {
+
+     // Check the state of the beam break sensor
+     if (m_robotContainer.m_OuttakeSubsystem.beamBreakCleared() == true) {
+      // if beam is clear, enable elevator
+      m_elevatorEnabled = true;  // Motor stops
+      m_robotContainer.m_ElevatorSubsystem.enableElevator();
+      m_robotContainer.m_LedController.set_Green();
+
+    //System.out.println("elevator enabled " + m_elevatorEnabled);
+  } else {
+    // If beam is blocked, disable elevator
+    m_elevatorEnabled = false;
+    m_robotContainer.m_ElevatorSubsystem.disableElevator();
+    m_robotContainer.m_LedController.set_RedOrange();
+    //System.out.println("elevator enabled " + m_elevatorEnabled);
+  
+  }
+  m_robotContainer.m_scaleSpeed = m_robotContainer.drivebase.getScaleSpeed();
+
+
     /*if (SmartDashboard.getBoolean("Control Mode", false)) {
       /*
        * Get the target position from SmartDashboard and set it as the setpoint

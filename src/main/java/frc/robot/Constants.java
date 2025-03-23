@@ -23,44 +23,55 @@ public final class Constants
   public static class ClimberConstants {
     // Units are shows between <>
     // Gearbox ratio of arm motor <unitless>
-    public static final int kArmGearBoxRatio = 100;
+    public static final int kArmGearBoxRatio = 225;
 
-    public static final double kP = 0.03;
+    public static final double kP = 1.0;
 
-    // The arm rotates from 0 upto 120 degrees
+    // The arm rotates from 0 upto 150 degrees
     // Calculate arm rotation distance in rotations <rotations> 
-    public static final double kArmRotationDistance = 125.0/360.0;
+    public static final double kArmRotationDistance = 109.0/360.0;
 
     // Set position ranges to rotate arm
-    // Note:  Hard stop is at zero postion 
-    public static final double kMaxPosition =(kArmRotationDistance + 20.0/360.0) * kArmGearBoxRatio;
-    public static final double kDeployPosition = kArmRotationDistance * kArmGearBoxRatio;
-    public static final double kMinPosition = 0;
+    // Maximum we can go is above the rotation distance
+    
+    public static final double kMaxPosition =(kArmRotationDistance + 0.0/360.0) * kArmGearBoxRatio;
 
-    public static final double kLiftPosition = 45.0/360.0 * kArmGearBoxRatio;
+    // Location where arm is deployed
+    public static final double kDeployPosition = 109.0/360.0 * kArmGearBoxRatio;//kArmRotationDistance * kArmGearBoxRatio;
+
+    // Arm initially in bucket.
+    // We cannot retract the arm back to zero position once deployed
+    // We can only move to safe distance above the bucket as it is a hard stop
+    public static final double kPreLatchPosition = 75.0/360.0 * kArmGearBoxRatio;
+
+    // Locaiton where frame lifts off the floor on the lift
+    public static final double kLiftPosition = 15.0/360.0 * kArmGearBoxRatio;
 
     // Set initial arm increment
     public static final double kArmIncrement = 10.0 / 360.0 * kArmGearBoxRatio;
     
     // Time takes arm to rotate through range <seconds> 
-    public static final double kArmRotationTime = 3.0;
+    public static final double kArmRotationTime = 2.0;
     // Arm revolutions per minute = rotation time / ( 60 * rotation range) <rpm>
     // Note:  even though arm does not rotate one full rotation we need to
     //         include it in calculation since we are calculating revolutions per minute
-    public static final double kArmRpm = kArmRotationDistance/kArmRotationTime * 60; //2000.0/kArmGearBoxRatio; // kArmRotationTime / ( 60 * kArmRotationDistance) ;
+    public static final double kArmRpm = kArmRotationDistance/kArmRotationTime * 60;
     // The motor is on the other side of the gear box and runs faster than the arm
     // To calculate motor rpm multiple the arm rpm by the gearbox ratios <rpm>
-    public static final double kMotorRpm = kArmRpm * kArmGearBoxRatio;
-    public static final double kMotorRpmAcc = kMotorRpm/60;
+    public static final double kMotorRpm = 0.4*kArmRpm * kArmGearBoxRatio;
+    public static final double kMotorRpmAcc = 3*kMotorRpm/60;
 
-    public static final int kCANidMotor = 15;
+     // start with 15 right, 16 left
+    public static final int kCANidMotorRight = 15;
+    public static final int kCANidMotorLeft = 16;
+
     
   }
 
   public static final double ROBOT_MASS = (148 - 20.3) * 0.453592; // 32lbs * kg per pound
   public static final Matter CHASSIS    = new Matter(new Translation3d(0, 0, Units.inchesToMeters(8)), ROBOT_MASS);
   public static final double LOOP_TIME  = 0.13; //s, 20ms + 110ms sprk max velocity lag
-  public static final double MAX_SPEED  = Units.feetToMeters(1.0);
+  public static final double MAX_SPEED  = Units.feetToMeters(14.0);
   // Maximum speed of the robot in meters per second, used to limit acceleration.
 
 //  public static final class AutonConstants
@@ -70,25 +81,13 @@ public final class Constants
 //    public static final PIDConstants ANGLE_PID       = new PIDConstants(0.4, 0, 0.01);
 //  }
 
-public static final class ClimberSubsystem {
-  public static final int CANidClimbMotor = 15;
-}
-
-public static final class ElevatorSubsystem {
-  public static final int CANidElevatorMotorleft = 9;
-  public static final int CANidElevatorMotorright = 10;
-}
-
-public static final class OuttakeSubsystem {
-  public static final int CANidOuttakeMotorleft = 11;
-  public static final int CANidOuttakeMotorright = 12;
-}
-
   public static final class DrivebaseConstants
   {
 
     // Hold time on motor brakes when disabled
     public static final double WHEEL_LOCK_TIME = 10; // seconds
+    public static final double FAST_SPEED = 1.0;
+    public static final double SLOW_SPEED = 0.25;
   }
 
   public static class OperatorConstants
@@ -100,7 +99,7 @@ public static final class OuttakeSubsystem {
     public static final double TURN_CONSTANT    = 6;
   }
 
-public static final class ElevatorConstants {
+  public static final class ElevatorConstants {
     // Units are shows between <>
     // Gearbox ratio of arm motor <unitless>
     public static final int kCANIdLeftMotor = 9;
@@ -109,29 +108,43 @@ public static final class ElevatorConstants {
 
     public static final int kElevatorGearBoxRatio = 15;
     public static final double kDt = 0.02;
-    public static final double kMaxVelocity = 7.5;
-    public static final double kMaxAcceleration = 4.0;
-    public static final double kP = 0.85;
+    public static final double kMaxVelocity = 25.0;
+    public static final double kMaxAcceleration = 15.0;
+    public static final double kP = 1.2;
     public static final double kI = 0.0;
     public static final double kD = 0.0;//0.7;
     public static final double kS = 0.0;//1.1;
     public static final double kG = 0.18;
     public static final double kV = 0.4;//1.3;
 
-    //height of coarl in inches
-    public static final double L_1 = 18; 
-    public static final double L_2 = 32;
-    public static final double L_3 = 48;
-    public static final double pHome= 0;//testing values
+    //height of coral in inches
+    public static final double L_2 = 19.0; 
+    public static final double L_3 = 33.75;
+    public static final double L_Climb = 22.0;
+
+
+    //DO NOT CHANGE pOffset
+    public static final double pOffset= 8.0;
 
     //distance traveled
-    public static final double position_Home = pHome ;
-
-    public static final double position_L1 = (L_1-pHome);
-    public static final double position_L2 = (L_2-pHome);
-    public static final double position_L3 = (L_3-pHome);
+    public static final double position_Home = 0.0;
+    public static final double position_L2 = (L_2-pOffset);
+    public static final double position_L3 = (L_3-pOffset);
+    public static final double position_Climb = (L_Climb-pOffset);
+    
 
     
+}
+
+
+public static final class OuttakeConstants {
+  // Units are shows between <>
+  // Gearbox ratio of arm motor <unitless>
+  public static final int kCANIdLeftMotor = 11;
+  public static final int kCANIdRightMotor = 12;
+  public static final double kCoralShootSpeed = 0.75;
+  public static final double kCoralFeedSpeed = 0.15;
+
 }
 
 }

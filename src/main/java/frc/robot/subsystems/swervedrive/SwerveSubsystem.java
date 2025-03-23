@@ -36,6 +36,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Config;
 import frc.robot.Constants;
+import frc.robot.Constants.DrivebaseConstants;
 import frc.robot.subsystems.swervedrive.Vision.Cameras;
 import java.io.File;
 import java.io.IOException;
@@ -75,6 +76,8 @@ public class SwerveSubsystem extends SubsystemBase
    * PhotonVision class to keep an accurate odometry.
    */
   private Vision vision;
+
+  private double m_scaleSpeed = DrivebaseConstants.FAST_SPEED;
 
   /**
    * Initialize {@link SwerveDrive} with the directory provided.
@@ -732,4 +735,18 @@ public class SwerveSubsystem extends SubsystemBase
   {
     return swerveDrive;
   }
+
+public void toggleDriveSpeed(){
+    if (m_scaleSpeed == DrivebaseConstants.FAST_SPEED) {
+      m_scaleSpeed = DrivebaseConstants.SLOW_SPEED;
+    } else {
+      m_scaleSpeed = DrivebaseConstants.FAST_SPEED;
+    }
+  }
+
+  public double getScaleSpeed(){
+    return m_scaleSpeed;
+  }
+
+
 }
