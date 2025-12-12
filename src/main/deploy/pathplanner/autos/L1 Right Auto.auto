@@ -5,9 +5,15 @@
     "data": {
       "commands": [
         {
+          "type": "wait",
+          "data": {
+            "waitTime": 5.0
+          }
+        },
+        {
           "type": "path",
           "data": {
-            "pathName": "L2 Right"
+            "pathName": "L1 Right"
           }
         }
       ]

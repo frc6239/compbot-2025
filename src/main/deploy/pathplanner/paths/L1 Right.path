@@ -3,41 +3,41 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.591529605263157,
-        "y": 6.170641447368421
+        "x": 7.55846590909091,
+        "y": 1.8162926136363637
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.079829545454547,
-        "y": 6.094105113636363
+        "x": 7.242698863636366,
+        "y": 2.7741776315789473
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 5.195723684210526,
-        "y": 5.121875
+        "x": 5.324829545454545,
+        "y": 2.9829687499999995
       },
       "prevControl": {
-        "x": 5.480766830298699,
-        "y": 4.971859334852186
+        "x": 5.771276913875598,
+        "y": 3.3052960526315784
       },
       "nextControl": {
-        "x": 4.636789772727273,
-        "y": 5.416036931818183
+        "x": 4.678843698029271,
+        "y": 2.5165781058459773
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 5.811513157894736,
-        "y": 6.170641447368421
+        "x": 5.7056743421052625,
+        "y": 1.3020559210526312
       },
       "prevControl": {
-        "x": 4.82625,
-        "y": 5.386122159090909
+        "x": 4.656732954545454,
+        "y": 1.4672869318181816
       },
       "nextControl": null,
       "isLocked": false,
@@ -47,7 +47,7 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 1.0,
-      "rotationDegrees": 59.99999999999999
+      "rotationDegrees": -59.99999999999999
     }
   ],
   "constraintZones": [],
@@ -66,6 +66,24 @@
               "data": {
                 "name": "Enable Outtake"
               }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "Slow Score"
+              }
+            },
+            {
+              "type": "wait",
+              "data": {
+                "waitTime": 0.5
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "Disable Outtake"
+              }
             }
           ]
         }
@@ -73,7 +91,7 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 0.75,
+    "maxVelocity": 3.0,
     "maxAcceleration": 1.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
@@ -90,5 +108,5 @@
     "velocity": 0,
     "rotation": 0.0
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

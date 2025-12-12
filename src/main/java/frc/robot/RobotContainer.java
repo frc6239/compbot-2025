@@ -17,9 +17,12 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
@@ -28,6 +31,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import java.io.File;
+import java.util.List;
 import java.util.Map;
 
 import swervelib.SwerveInputStream;
@@ -50,10 +54,19 @@ import com.pathplanner.lib.auto.NamedCommands;
  */
 public class RobotContainer
 {
+
+  
   // The robot's subsystems and commands are defined here...
   public final Climber m_climberSubsystem = new Climber();
   public final Elevator m_ElevatorSubsystem = new Elevator();
   public final Outtake m_OuttakeSubsystem = new Outtake();
+   private List<String> pathNames;
+     private final SendableChooser<String> m_chooser = new SendableChooser<>();
+     
+
+      // SmartDashboard Widget
+  private ComplexWidget m_autoSelectionComplexWidget;
+  private String m_autopathselected;
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   final         CommandXboxController driverXbox = new CommandXboxController(0);
@@ -63,6 +76,7 @@ public class RobotContainer
                                                                                 "swerve/neo.6239"));
   public LEDController m_LedController = new LEDController();
 
+  
   /**
    * Converts driver input into a field-relative ChassisSpeeds that is controlled by angular velocity.
    */
@@ -119,9 +133,10 @@ public class RobotContainer
                                                                                                                       2) *
                                                                                                                   Math.PI) *
                                                                                                               (Math.PI *
-                                                                                                               2))
+                                                                                                              2))
                                                                                .headingWhile(true);
 
+    
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -151,6 +166,35 @@ public class RobotContainer
   
     if (DriverStation.isTest()){
         SmartDashboard.putData("Retract", Commands.runOnce(m_climberSubsystem::retract,m_climberSubsystem));
+
+
+        // Get names of all of the paths
+      pathNames = AutoBuilder.getAllAutoNames();
+      // Iterate list of pathnames and add them as choices on Shuffleboard
+      for (int i=0; i< pathNames.size(); i++) {
+        m_chooser.addOption(pathNames.get(i),pathNames.get(i));
+        //m_chooser_smartdashboard.addOption(pathNames.get(i), pathNames.get(i));
+      }
+  
+      // Set default option to be the first element
+      // FIXME:  Matt to create Default path and hard code Default string below
+      m_chooser.setDefaultOption("No Move","No Move");
+      //m_chooser_smartdashboard.setDefaultOption(pathNames.get(0), pathNames.get(0));
+  
+      
+      // Put the Autonomous chooser on SmartDashboard 
+      SmartDashboard.putData("Auto Command", m_chooser);
+
+        // Put the Autonomous chooser on the Shuffleboard
+    m_autoSelectionComplexWidget = Shuffleboard.getTab("Configuration")
+      .add("Auto Path Command", m_chooser)
+      .withSize(2, 1)
+      .withPosition(0, 0)
+      .withWidget(BuiltInWidgets.kComboBoxChooser);
+
+
+    
+  
     }
 
     /*Shuffleboard.getTab("Autonomous")
@@ -169,6 +213,7 @@ public class RobotContainer
 
 
   }
+
 
 
   /**
@@ -315,15 +360,8 @@ public class RobotContainer
         return drivebase.driveToDistanceCommand(1.0, -3.0);
       }
     }*/
-  
     return drivebase.getAutonomousCommand("L1 Auto");
 
-
-
-
-    
-    // An example command will be run in autonomous
-    //return drivebase.getAutonomousCommand("Leave Auto");
   }
 
   public void setMotorBrake(boolean brake)
